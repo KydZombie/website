@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/default.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+
+        <title>Testing</title>
+
+        <script src="test.js" type="module" defer></script>
+    </head>
+    <body>
+        <canvas id="background"></canvas>
+
+        <div id="center">
+            <a href="/" id="title" class="rainbow">Gizmordo's Website</a>
+
+            <div id="bouncybit"></div>
+
+            <p>This is my website!</p>
+            <p>Woot!</p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Mauris nibh nisl, tincidunt sit amet facilisis eleifend, semper in ligula. 
+                Duis ut lacinia nunc. 
+                Pellentesque ut.
+            </p>
+
+            <div style="margin: 48px"></div>
+
+            <canvas id="gamecanvas" width="1280" height="720"></canvas>
+
+            <div id="bouncybit"></div>
+
+            <button id="testbutton" class="roundedbutton" type="button" onclick="testButtonClicked()">Test Button</button>
+
+            <div id="testlist"></div>
+            
+            <div class="slidecontainer">
+                <p id="speedinfobox" class="infobox">Canvas Update Speed: </p>
+                <input type="range" min="1" max="480" value="480" class="slider" id="canvasSpeedRange">
+            </div>
+
+            <div class="slidecontainer">
+                <p id="countinfobox" class="infobox">Canvas Square Count: </p>
+                <input type="range" min="0" max="100" value="5" class="slider" id="canvasSquareCountRange">
+            </div>
+
+            <input type="text" id="colorinput">
+            <button onclick="colorButtonClicked()" class="roundedbutton">Set Color</button>
+        </div>
+
+        <footer id="footer-bar">
+            <p class="footer-text-left">Made by KydZombie.</p>
+            <p id="cardcounter" class="footer-text-right">2023</p>
+        </footer>
+    </body>
+</html>

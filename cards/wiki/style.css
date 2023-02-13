@@ -1,0 +1,125 @@
+body {
+  color: black;
+}
+
+#buttons {
+  background-color: #fff2;
+  border-radius: 12px;
+  width: max-content;
+  margin: 0 auto;
+
+  overflow: hidden;
+  height: 80px;
+  transition: 0.5s;
+}
+
+#buttons button:hover {
+  background: #fff1;
+  cursor: pointer;
+}
+
+#databuttons {
+  opacity: 0;
+  transition: 0.5s;
+}
+
+#databuttons.visible {
+  opacity: 1;
+}
+
+.cardbutton {
+  border: solid gainsboro 2px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+  margin: 10px;
+
+  width: 60px;
+  height: 60px;
+}
+
+.card {
+  background-color: gainsboro;
+  min-height: 120px;
+  width: 240px;
+  border-radius: 8px;
+  height: fit-content;
+  transition: opacity, 1s;
+  opacity: 1;
+}
+
+.card.throwcard-right {
+  position: fixed;
+  animation: throw-right 1s ease 0s 1 normal forwards;
+  opacity: 0;
+}
+
+@keyframes throw-right {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+
+  100% {
+    transform: translateX(250px) translateY(-80px) rotate(40deg);
+  }
+}
+
+.card.throwcard-left {
+  position: fixed;
+  animation: throw-left 1s ease 0s 1 normal forwards;
+  opacity: 0;
+}
+
+@keyframes throw-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-250px) translateY(-80px) rotate(-40deg);
+  }
+}
+
+.cardtitle {
+  background-color: lightcoral;
+  font-size: 1.5rem;
+
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.cardinfo {
+  background-color: lightpink;
+
+  margin-top: 0;
+  margin-bottom: 5px;
+
+  word-wrap: break-word;
+  transition: 0.25s;
+}
+
+.blurred {
+  color: transparent;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+.blurred * {
+  color: transparent;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+#deck {
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}

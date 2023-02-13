@@ -1,0 +1,29 @@
+{
+    "mainList": {
+        "exampleItem": {
+            "description": "An example item"
+        },
+        "main": {
+            "referenceList": "secondList"
+        },
+        "cards": {
+            "referenceList": "cardsList"
+        }
+    },
+    "secondList": {
+        "exampleItem": {
+            "description": "An example item"
+        },
+        "exampleItem2": {
+            "description": "An example item"
+        }
+    },
+    "cardsList": {
+        "exampleItem": {
+            "description": "An example item"
+        },
+        "exampleItem2": {
+            "description": "An example item"
+        }
+    }
+}

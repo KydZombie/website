@@ -1,0 +1,53 @@
+<html lang="en"><head><script type="text/javascript" src="/___vscode_livepreview_injected_script"></script>
+        <meta charset="UTF-8">
+        <title>WebGL Test</title>
+        <link rel="shortcut icon" type="image/png" href="favicon.png">
+
+        <link rel="stylesheet" href="/default.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <canvas id="c"></canvas>
+
+        <script src="resources/webgl-utils.js"></script>
+
+        <script id="vertex-shader-2d" type="notjs">
+            attribute vec4 a_position;
+          
+            uniform vec2 u_resolution;
+          
+            void main() {
+               // convert the position from pixels to 0.0 to 1.0
+               vec2 zeroToOne = a_position.xy / u_resolution;
+          
+               // convert from 0->1 to 0->2
+               vec2 zeroToTwo = zeroToOne * 2.0;
+          
+               // convert from 0->2 to -1->+1 (clipspace)
+               vec2 clipSpace = zeroToTwo - 1.0;
+          
+               gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
+            }
+          </script>
+
+        <script id="fragment-shader-2d" type="notjs">
+            precision mediump float;
+
+            uniform vec4 u_color;
+
+            void main() {
+                gl_FragColor = u_color;
+            }
+
+        </script>
+
+        
+
+        <script src="test.js"></script>
+
+        <footer id="footer-bar">
+            <p class="footer-text-left">Made by KydZombie.</p>
+            <p id="cardcounter" class="footer-text-right">2023</p>
+        </footer>
+    
+</body></html>
