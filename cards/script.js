@@ -239,7 +239,7 @@ function loop() {
   // else {
   //   cardCounter.innerHTML = "Card: N/A";
   // }
-  
+
   if (currentCard.classList.contains("throwcard") || currentCard.hidden) {
     currentCard.classList.remove("throwcard");
     currentCard.hidden = false;

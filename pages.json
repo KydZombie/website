@@ -1,16 +1,23 @@
 {
     "mainList": {
-        "Projects": {
-            "referenceList": "projectsList"
+        "Games": {
+            "description": "Games I've made",
+            "referenceList": "gamesList"
         },
         "Cards": {
+            "description": "A little cards program with many capabilities",
             "referenceList": "cardsList"
+        },
+        "Misc. Projects": {
+            "description": "Other projects that I've done, including those not on the web.",
+            "referenceList": "projectsList"
         },
         "Tests": {
             "description": "All of my test websites.",
             "referenceList": "testsList"
         },
         "About": {
+            "description": "About me",
             "referenceList": "aboutList"
         },
         "Other": {
@@ -18,11 +25,7 @@
             "referenceList": "otherList"
         }
     },
-    "projectsList": {
-        "This Page": {
-            "description": "Yeah"
-        }
-    },
+    "gamesList": {},
     "cardsList": {
         "Cards": {
             "description": "A basic card program.",
@@ -33,14 +36,15 @@
             "link": "/cards/wiki/"
         }
     },
+    "projectsList": {
+        "This Page": {
+            "description": "Yeah"
+        }
+    },
     "testsList": {
         "WebGL": {
             "description": "A basic test of WebGL",
             "link": "/tests/webgl/"
-        },
-        "Canvas": {
-            "description": "I don't really know what this is. It was my first website though",
-            "link": "/tests/canvas/"
         }
     },
     "aboutList": {

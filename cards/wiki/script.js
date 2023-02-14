@@ -134,7 +134,7 @@ function formatExtract(extract) {
     extract = extract.slice(0, 128);
     extract = extract + "..."
   }
-  
+
   return extract;
 }
 
