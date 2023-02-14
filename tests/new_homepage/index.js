@@ -33,13 +33,29 @@ function loadPageListContainer() {
         for (let i = 1; i < pageListElements.length; i++) {
           const pageList = pageListElements[i];
           if (pageList.id == pageData.referenceList) {
-            pageList.style = "display: flex";
+            pageList.hidden = false;
           } else {
-            pageList.style = "display: none";
+            pageList.hidden = true;
           }
         }
       });
     }
+    if (page.dataset["onClick"]) {
+      page.addEventListener("click", () => eval("" + page.dataset["onClick"] + ""));
+      // page.addEventListener("onclick", () => console.log("hi"));
+
+    }
+
+    page.addEventListener("mouseenter", () => {
+      cursorBalls.forEach(ball => {
+        ball.classList.add("hovering");
+      });
+    });
+    page.addEventListener("mouseleave", () => {
+      cursorBalls.forEach(ball => {
+        ball.classList.remove("hovering");
+      });
+    });
   });
 }
 
@@ -49,7 +65,7 @@ function loadPageList(listKey, isMain) {
   listElement.id = listKey;
   listElement.classList.add("pagelist");
 
-  if (!isMain) listElement.style = "display: none";
+  if (!isMain) listElement.hidden = true;
 
   let pageItemIndexes = Object.keys(pageJson[listKey]);
   pageItemIndexes.forEach(page => {
@@ -85,3 +101,39 @@ getJson("pages.json").then(json => {
   pageJson = json;
   loadPageListContainer();
 });
+
+let BALL_COUNT = 20;
+let BALL_SIZE = 15;
+let cursorDiv = document.getElementById("cursor");
+let cursorBalls = [];
+
+cursorDiv.style.position = "fixed";
+
+for (let i = 0; i < BALL_COUNT; i++) {
+  let newBall = document.createElement("div");
+  let size = BALL_SIZE - BALL_SIZE * (i / BALL_COUNT) + "px";
+  newBall.classList.add("cursorball");
+  newBall.style.left = 0;
+  newBall.style.top = 0;
+  newBall.style.width = size;
+  newBall.style.height = size;
+  cursorBalls[i] = newBall;
+  cursorDiv.appendChild(newBall);
+}
+
+document.addEventListener("mousemove", e => {
+  let ball = cursorBalls[0];
+  ball.style.left = e.pageX + "px";
+  ball.style.top = e.pageY + "px";
+});
+
+setInterval(() => {
+  for (let i = BALL_COUNT - 1; i >= 0; i--) {
+    let ball = cursorBalls[i];
+    if (i != 0) {
+      let nextBall = cursorBalls[i - 1];
+      ball.style.left = nextBall.style.left;
+      ball.style.top = nextBall.style.top;
+    }
+  }
+}, 5);

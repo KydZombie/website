@@ -12,8 +12,9 @@
         }
     },
     "secondList": {
-        "Example Item": {
-            "description": "An example item"
+        "Secret": {
+            "description": "Ooooh!",
+            "onClick": "cursorBalls.slice(1).forEach(ball=>ball.style.transition = '.25s');"
         },
         "Example Item 2": {
             "description": "An example item"
