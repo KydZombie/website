@@ -1,3 +1,5 @@
+import * as cursor from "/common/cursor.js";
+
 const [backEl, showEl, hideEl, nextEl] = document.querySelectorAll(
   '#cardbuttons button'
 );
@@ -7,7 +9,7 @@ hideEl.addEventListener('click', hideCardInfo);
 backEl.addEventListener('click', backCard);
 nextEl.addEventListener('click', nextCard);
 
-let title = document.getElementById('title');
+cursor.addHoveringToAll([backEl, showEl, hideEl, nextEl]);
 
 const deck = document.getElementById('deck');
 
@@ -153,12 +155,12 @@ function start() {
 
 const cardCounter = document.getElementById("cardcounter");
 function loop() {
-  // if (cards.length > 0) {
-  //   cardCounter.innerHTML = `Card: ${currentCardId + 1}/${cards.length}`;
-  // }
-  // else {
-  //   cardCounter.innerHTML = "Card: N/A";
-  // }
+  if (cards.length > 0) {
+    cardCounter.innerHTML = `Card: ${currentCardId + 1}/${cards.length}`;
+  }
+  else {
+    cardCounter.innerHTML = "Card: N/A";
+  }
 
   if (currentCard.classList.contains("throwcard") || currentCard.hidden) {
     currentCard.classList.remove("throwcard");

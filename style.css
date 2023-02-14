@@ -1,16 +1,7 @@
-html {
-    cursor: none;
-}
-
-@font-face {
-    font-family: Potta;
-    src: url(/fonts/PottaOne.ttf);
-}
-
-@font-face {
-    font-family: Mochiy;
-    src: url(/fonts/MochiyPopOne.ttf);
-}
+@import url(/common/cursor.css);
+@import url(/common/fonts.css);
+@import url(/common/footer.css);
+@import url(/common/pagelist.css);
 
 body {
     background: #121212;
@@ -27,108 +18,11 @@ body {
     margin-bottom: 2vh;
 }
 
-#pagelistcontainer {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    flex-direction: column;
-}
-
-.pagelist {
-    background: #1f1f1f;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    height: 160px;
-    gap: 20px;
-}
-
-.page {
-    font-family: Mochiy;
-    display: flex;
-    font-size: 0.9rem;
-    background: #333333;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    width: 80px;
-    height: 80px;
-    border-radius: 10%;
-    transition: transform .5s, background-color .5s;
-    user-select: none;
-}
-
-.page:hover {
-    background: #E91E63;
-    transform: scale(1.25);
-    transition: transform .25s, background-color .25s;
-}
-
-.page.clickable {
-    background: #004D40;
-    color: inherit;
-    text-decoration: none;
-    cursor: none;
-}
-
-.page.clickable:hover {
-    background: #e9a51e;
-}
-
-/* .page[data-reference-list] {
-    background: #e91ec7;
-} */
-
 #infopanel {
     font-size: 3rem;
     text-align: center;
     padding-left: 10%;
     padding-right: 10%;
-}
-
-#footer-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2.5vh;
-    background-color: #5C6BC0;
-    color: #C5CAE9;
-}
-
-.footerleft,
-.footerright {
-    border: 0;
-    background-color: transparent;
-    margin-top: 0px;
-}
-
-.footerleft {
-    float: left;
-}
-
-.footerright {
-    float: right;
-}
-
-.cursorball {
-    position: fixed;
-    padding: 0;
-    margin: 0;
-    background: white;
-    border-radius: 50%;
-    pointer-events: none;
-    cursor: none;
-    z-index: 10;
-    transform: translate(-50%, -50%);
-    transition: background-color .25s;
-
-}
-
-.cursorball.hovering {
-    background: #64FFDA;
 }
 
 [hidden] {

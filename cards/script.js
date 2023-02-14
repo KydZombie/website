@@ -1,3 +1,5 @@
+import * as cursor from "/common/cursor.js";
+
 const [backEl, showEl, hideEl, nextEl, moreEl, lessEl] = document.querySelectorAll(
   '#cardbuttons button'
 );
@@ -20,7 +22,7 @@ loadEl.addEventListener('click', loadCards);
 clearEl.addEventListener('click', clearCards);
 wipeEl.addEventListener('click', wipeStorage);
 
-let title = document.getElementById('title');
+cursor.addHoveringToAll([backEl, showEl, hideEl, nextEl, moreEl, lessEl, addEl, removeEl, saveEl, loadEl, clearEl, wipeEl]);
 
 const deck = document.getElementById('deck');
 
@@ -164,7 +166,6 @@ const buttonsMenu = document.getElementById('buttons');
 const dataButtons = document.getElementById('databuttons');
 const moreButton = document.getElementById('more');
 const lessButton = document.getElementById('less');
-const buttonsBackground = document.getElementById('buttonsbackground');
 function showMore(show) {
   if (show) {
     buttonsMenu.classList.add('extended');
@@ -233,12 +234,12 @@ function start() {
 
 const cardCounter = document.getElementById("cardcounter");
 function loop() {
-  // if (cards.length > 0) {
-  //   cardCounter.innerHTML = `Card: ${currentCardId + 1}/${cards.length}`;
-  // }
-  // else {
-  //   cardCounter.innerHTML = "Card: N/A";
-  // }
+  if (cards.length > 0) {
+    cardCounter.innerHTML = `Card: ${currentCardId + 1}/${cards.length}`;
+  }
+  else {
+    cardCounter.innerHTML = "Card: N/A";
+  }
 
   if (currentCard.classList.contains("throwcard") || currentCard.hidden) {
     currentCard.classList.remove("throwcard");

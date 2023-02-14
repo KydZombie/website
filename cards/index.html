@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script src="script.js" defer></script>
+    <script src="script.js" type="module" defer></script>
     <title>Cards</title>
     <link rel="stylesheet" href="style.css">
 
@@ -68,8 +68,8 @@
         <div id="buttons">
             <div id="cardbuttons">
                 <button id="back" class="cardbutton">Back</button>
-                <button id="show" class="cardbutton">Show</button>
-                <button id="hide" class="cardbutton" hidden>Hide</button>
+                <button id="show" class="cardbutton" hidden>Show</button>
+                <button id="hide" class="cardbutton">Hide</button>
                 <button id="next" class="cardbutton">Next</button>
                 <button id="more" class="cardbutton">More</button>
                 <button id="less" class="cardbutton" hidden>Less</button>
@@ -85,6 +85,10 @@
             <div id="buttonsbackground"></div>
         </div>
     </div>
+    <footer id="footerbar">
+        <p class="footerleft">Made by KydZombie.</p>
+        <p id="cardcounter" class="footerright"></p>
+    </footer>
 </body>
 
 

@@ -1,3 +1,6 @@
+@import url(/common/cursor.css);
+@import url(/common/footer.css);
+
 body {
   background: black;
 }
@@ -23,7 +26,6 @@ body {
 
 #buttons button:hover {
   background: #fff1;
-  cursor: pointer;
 }
 
 #databuttons {
