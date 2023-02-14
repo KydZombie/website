@@ -3,7 +3,7 @@ body {
     color: #C8C8C8;
 }
 
-.pagelistcontainer {
+#pagelistcontainer {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -27,8 +27,8 @@ body {
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    width: 20vh;
-    height: 20vh;
+    width: 80px;
+    height: 80px;
     border-radius: 10%;
     transition: transform .5s, background-color .5s;
 }
@@ -40,6 +40,6 @@ body {
 }
 
 #infopanel {
-    font-size: 4rem;
+    font-size: 3rem;
     text-align: center;
 }

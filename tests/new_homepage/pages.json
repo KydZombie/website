@@ -1,29 +1,30 @@
 {
     "mainList": {
-        "exampleItem": {
-            "description": "An example item"
+        "Example Item": {
+            "description": "An example item",
+            "link": "https://google.com"
         },
-        "main": {
+        "Main": {
             "referenceList": "secondList"
         },
-        "cards": {
+        "Cards": {
             "referenceList": "cardsList"
         }
     },
     "secondList": {
-        "exampleItem": {
+        "Example Item": {
             "description": "An example item"
         },
-        "exampleItem2": {
+        "Example Item 2": {
             "description": "An example item"
         }
     },
     "cardsList": {
-        "exampleItem": {
-            "description": "An example item"
+        "Card Item": {
+            "description": "An example card item"
         },
-        "exampleItem2": {
-            "description": "An example item"
+        "Card Item 2": {
+            "description": "An example card item"
         }
     }
 }
