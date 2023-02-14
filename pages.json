@@ -1,5 +1,8 @@
 {
     "mainList": {
+        "Projects": {
+            "referenceList": "projectsList"
+        },
         "Cards": {
             "referenceList": "cardsList"
         },
@@ -7,9 +10,17 @@
             "description": "All of my test websites.",
             "referenceList": "testsList"
         },
+        "About": {
+            "referenceList": "aboutList"
+        },
         "Other": {
             "description": "Haha funny",
             "referenceList": "otherList"
+        }
+    },
+    "projectsList": {
+        "This Page": {
+            "description": "Yeah"
         }
     },
     "cardsList": {
@@ -30,6 +41,14 @@
         "Canvas": {
             "description": "I don't really know what this is. It was my first website though",
             "link": "/tests/canvas/"
+        }
+    },
+    "aboutList": {
+        "Who?": {
+            "description": "Me"
+        },
+        "Why?": {
+            "description": "Because I can"
         }
     },
     "otherList": {

@@ -42,7 +42,7 @@ function loadPageListContainer() {
     }
     if (page.dataset["onClick"]) {
       page.classList.add("clickable");
-      page.addEventListener("click", () => eval("" + page.dataset["onClick"] + ""));
+      page.addEventListener("click", () => eval(page.dataset["onClick"]));
     }
 
     page.addEventListener("mouseenter", () => {

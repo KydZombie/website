@@ -1,5 +1,3 @@
-import { rainbowLoop } from "/rainbow.js";
-
 const [backEl, showEl, hideEl, nextEl, moreEl, lessEl] = document.querySelectorAll(
   '#cardbuttons button'
 );
@@ -235,14 +233,12 @@ function start() {
 
 const cardCounter = document.getElementById("cardcounter");
 function loop() {
-  rainbowLoop();
-
-  if (cards.length > 0) {
-    cardCounter.innerHTML = `Card: ${currentCardId + 1}/${cards.length}`;
-  }
-  else {
-    cardCounter.innerHTML = "Card: N/A";
-  }
+  // if (cards.length > 0) {
+  //   cardCounter.innerHTML = `Card: ${currentCardId + 1}/${cards.length}`;
+  // }
+  // else {
+  //   cardCounter.innerHTML = "Card: N/A";
+  // }
   
   if (currentCard.classList.contains("throwcard") || currentCard.hidden) {
     currentCard.classList.remove("throwcard");
