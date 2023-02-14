@@ -67,16 +67,18 @@ body {
     transition: transform .25s, background-color .25s;
 }
 
-a.page {
+.page.clickable {
     background: #004D40;
     color: inherit;
     text-decoration: none;
     cursor: none;
 }
 
-a.page:hover {
+.page.clickable:hover {
     background: #e9a51e;
 }
+
+
 
 /* .page[data-reference-list] {
     background: #e91ec7;

@@ -41,9 +41,8 @@ function loadPageListContainer() {
       });
     }
     if (page.dataset["onClick"]) {
+      page.classList.add("clickable");
       page.addEventListener("click", () => eval("" + page.dataset["onClick"] + ""));
-      // page.addEventListener("onclick", () => console.log("hi"));
-
     }
 
     page.addEventListener("mouseenter", () => {
@@ -81,6 +80,7 @@ function loadPage(listKey, pageKey) {
   if (keys.includes("link")) {
     pageElement = document.createElement("a");
     pageElement.href = pageJson[listKey][pageKey]["link"];
+    pageElement.classList.add("clickable");
   } else {
     pageElement = document.createElement("p");
   }
