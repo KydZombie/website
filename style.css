@@ -77,17 +77,15 @@ body {
     background: #e9a51e;
 }
 
-
-
 /* .page[data-reference-list] {
     background: #e91ec7;
 } */
 
-
-
 #infopanel {
     font-size: 3rem;
     text-align: center;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 #footer-bar {

@@ -1,0 +1,41 @@
+{
+    "mainList": {
+        "Cards": {
+            "referenceList": "cardsList"
+        },
+        "Tests": {
+            "description": "All of my test websites.",
+            "referenceList": "testsList"
+        },
+        "Other": {
+            "description": "Haha funny",
+            "referenceList": "otherList"
+        }
+    },
+    "cardsList": {
+        "Cards": {
+            "description": "A basic card program.",
+            "link": "/cards/"
+        },
+        "Wiki Cards": {
+            "description": "Cards, but with random Wikipedia pages.",
+            "link": "/cards/wiki/"
+        }
+    },
+    "testsList": {
+        "WebGL": {
+            "description": "A basic test of WebGL",
+            "link": "/tests/webgl/"
+        },
+        "Canvas": {
+            "description": "I don't really know what this is. It was my first website though",
+            "link": "/tests/canvas/"
+        }
+    },
+    "otherList": {
+        "Secret": {
+            "description": "Ooooh!",
+            "onClick": "cursorBalls.slice(1).forEach(ball=>ball.style.transition = '.25s');"
+        }
+    }
+}
