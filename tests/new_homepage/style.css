@@ -19,7 +19,6 @@ body {
 }
 
 .title {
-    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
     font-family: Potta;
     font-size: 4rem;
     padding: 0;
@@ -87,7 +86,6 @@ body {
 
 
 #infopanel {
-    font-family: Zeyada;
     font-size: 3rem;
     text-align: center;
 }
