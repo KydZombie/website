@@ -25,7 +25,12 @@
             "referenceList": "otherList"
         }
     },
-    "gamesList": {},
+    "gamesList": {
+        "Quid Pro Quo": {
+            "description": "A tycoon-style game made for one of my classes.",
+            "link": "/games/quid/"
+        }
+    },
     "cardsList": {
         "Cards": {
             "description": "A basic card program.",
