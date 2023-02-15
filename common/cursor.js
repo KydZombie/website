@@ -54,6 +54,10 @@ export function addHoveringToAll(elements) {
   });
 }
 
+export function addHoveringToTag(filter) {
+  addHoveringToAll(Array.from(document.querySelectorAll(filter)));
+}
+
 export function setMode(mode) {
   if (mode == "space") {
     cursorBalls.slice(1).forEach(ball=>ball.style.transition = '.25s');

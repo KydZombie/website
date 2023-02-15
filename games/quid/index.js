@@ -1,34 +1,20 @@
-import * as cursor from "/common/cursor.js";
+import * as cursor from "../../common/cursor.js";
+import * as jsonLoader from "../../common/json-loader.js";
+import * as panel from "./panel.js";
 
-let board = document.getElementById("board");
+let bounties = panel.bountyList;
 
-document.addEventListener("keydown", (e) => {
-    if (e.key == ' ') {
-        if (board.classList.contains("closed")) {
-            board.classList.remove("closed");
-        }
-        else {
-            board.classList.add("closed");
-        }
-    }
-});
+let state = {
+    obtained: {},
+    quid: 0
+};
+const {resources, quid} = state;
 
-let bounties = Array.from(document.getElementsByClassName("bounty"));
+bounties.addBounty("tutorial.startingOut");
 
-bounties.forEach(hoveringBounty => {
-    hoveringBounty.addEventListener("mouseenter", () => {
-        bounties.forEach(bounty => {
-            if (bounty == hoveringBounty) {
-                
-            }
-            else {
-                bounty.hidden = true;
-            }
-        });
-    });
-    hoveringBounty.addEventListener("mouseleave", () => {
-        bounties.forEach(bounty => {
-            bounty.hidden = false;
-        });
-    });
-});
+function loop() {
+    bounties.checkAll(state);
+    requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);

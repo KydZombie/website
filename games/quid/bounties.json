@@ -1,0 +1,47 @@
+{
+    "tutorial": {
+        "startingOut": {
+            "name": "Starting Out",
+            "description": "Click on this bounty to get rewards.",
+            "requirements": {
+                "abstract": ["click"]
+            },
+            "rewards": {
+                "quid": 50
+            },
+            "linkTo": "tutorial.basics"
+        },
+        "basics": {
+            "name": "The Basics",
+            "description": "To start making resources, click on the Manual Miner you have to generate some copper.",
+            "requirements": {
+                "copperOre": 5
+            },
+            "rewards": {
+                "unlock": "refinery",
+                "quid": 50
+            },
+            "linkTo": "tutorial.refining"
+        },
+        "refining": {
+            "name": "Refining",
+            "description": "Now that you have a refiner, you can start getting more from your resources",
+            "requirements": {
+                "copperBar": 5
+            },
+            "rewards": {
+                "unlock": "autoMiner",
+                "quid": 50
+            },
+            "punishments": {
+                "quid": 50
+            }
+        }
+    },
+    "linear": {
+
+    },
+    "random": {
+        
+    }
+}
