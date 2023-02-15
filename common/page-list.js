@@ -1,42 +1,56 @@
 import * as jsonLoader from "/common/json-loader.js";
 
-let pageJson;
-
 let pageListElements = [];
 let pages = [];
 
-let pageListContainer;
+let settings;
 
-let infoText = document.getElementById("infopanel");
+let cursor;
 
-export function grabPageLists(url, parent, runAfter) {
-  pageListContainer = parent;
-  jsonLoader.getJson(url).then(json => {
-    pageJson = json;
+export function grabPageLists(settingsPassed) {
+  settings = settingsPassed;
+  if (!settings.jsonUrl) {
+    settings.jsonUrl =  "pages.json";
+  }
+  if (!settings.listContainer) {
+    settings.listContainer = document.getElementById("pagelistcontainer");
+  }
+  if (!settings.infoText) {
+    settings.infoText = document.getElementById("infopanel");
+  }
+  if (settings.cursor) {
+    cursor = settings.cursor;
+  }
+  jsonLoader.getJson(settings.jsonUrl).then(json => {
+    settings.pageJson = json;
     loadPageLists();
   }).then(() => {
-    if (runAfter) {
-      runAfter(pages);
+    if (settings.runAfter) {
+      settings.runAfter(pages);
     }
   });
 }
 
 
 function loadPageLists() {
-  let pageLists = Object.keys(pageJson);
+  let pageLists = Object.keys(settings.pageJson);
 
   for (let pageListIndex = 0; pageListIndex < pageLists.length; pageListIndex++) {
     const list = pageLists[pageListIndex];
     pageListElements[pageListIndex] = loadPageList(list, pageListIndex == 0);
-    pageListContainer.appendChild(pageListElements[pageListIndex]);
+    settings.listContainer.appendChild(pageListElements[pageListIndex]);
+  }
+
+  if (cursor) {
+    cursor.addHoveringToAll(pages);
   }
 
   pages.forEach(page => {
     let pageData = page.dataset;
-    if (pageData.description != null && infoText) {
+    if (pageData.description != null && settings.infoText) {
       page.addEventListener("mouseenter", () => {
-        infoText.hidden = false;
-        infoText.innerHTML = `${page.innerHTML}: ${pageData.description}`;
+        settings.infoText.hidden = false;
+        settings.infoText.innerHTML = `${page.innerHTML}: ${pageData.description}`;
       });
     }
     if (pageData.referenceList != null) {
@@ -66,7 +80,7 @@ function loadPageList(listKey, isMain) {
 
   if (!isMain) listElement.hidden = true;
 
-  let pageItemIndexes = Object.keys(pageJson[listKey]);
+  let pageItemIndexes = Object.keys(settings.pageJson[listKey]);
   pageItemIndexes.forEach(page => {
     listElement.appendChild(loadPage(listKey, page));
   });
@@ -74,12 +88,12 @@ function loadPageList(listKey, isMain) {
 }
 
 function loadPage(listKey, pageKey) {
-  let keys = Object.keys(pageJson[listKey][pageKey]);
+  let keys = Object.keys(settings.pageJson[listKey][pageKey]);
 
   let pageElement;
   if (keys.includes("link")) {
     pageElement = document.createElement("a");
-    pageElement.href = pageJson[listKey][pageKey]["link"];
+    pageElement.href = settings.pageJson[listKey][pageKey]["link"];
     pageElement.classList.add("clickable");
   } else {
     pageElement = document.createElement("p");
@@ -90,7 +104,7 @@ function loadPage(listKey, pageKey) {
 
   keys.forEach(key => {
     if (key != "link") {
-      pageElement.dataset[key] = pageJson[listKey][pageKey][key];
+      pageElement.dataset[key] = settings.pageJson[listKey][pageKey][key];
     }
   })
   pages.push(pageElement);

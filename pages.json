@@ -58,7 +58,7 @@
     "otherList": {
         "Secret": {
             "description": "Ooooh!",
-            "onClick": "cursorBalls.slice(1).forEach(ball=>ball.style.transition = '.25s');"
+            "onClick": "cursor.setMode('space');"
         }
     }
 }

@@ -53,3 +53,9 @@ export function addHoveringToAll(elements) {
     addHovering(element);
   });
 }
+
+export function setMode(mode) {
+  if (mode == "space") {
+    cursorBalls.slice(1).forEach(ball=>ball.style.transition = '.25s');
+  }
+}
