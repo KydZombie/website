@@ -1,0 +1,28 @@
+{
+    "ui": {
+        "bounties": "Recompensas",
+        "requirement": "Requisitos",
+        "reward": "Premios",
+        "punishment": "Castigos",
+        "timeLimit": "Límite de tiempo",
+        "unlock": "Abrir"
+    },
+    "requirement": {
+        "click": "Hacer Clic En"
+    },
+    "item": {
+        "quid": "Quid",
+        "copperOre": "Mina de Cobre",
+        "copperBar": "Lingote de Cobre"
+    },
+    "bounty": {
+        "tutorial": {
+            "startingOut": "Empezar",
+            "manualMining": "Minería Manual",
+            "refining": "Refinación"
+        }
+    },
+    "unlock": {
+        "refinery": "Refinería"
+    }
+}

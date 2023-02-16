@@ -9,7 +9,9 @@ export async function traverseJson(json, path) {
 
     let currentObj = await json;
     while (directory.length > 0) {
-        currentObj = currentObj[directory.pop()];
+        let thing = directory.pop();
+        console.log()
+        currentObj = currentObj[thing];
     }
     return currentObj;
 }

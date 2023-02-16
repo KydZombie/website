@@ -1,5 +1,6 @@
 {
     "ui": {
+        "bounties": "Bounties",
         "requirement": "Requirements",
         "reward": "Rewards",
         "punishment": "Punishments",

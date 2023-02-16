@@ -2,6 +2,7 @@ import * as cursor from "../../common/cursor.js";
 import * as translator from "../../common/translation.js";
 import * as panel from "./panel.js";
 import * as world from "./world.js";
+import * as materials from "./materials.js";
 
 let canvas = document.getElementById("gamescreen");
 
