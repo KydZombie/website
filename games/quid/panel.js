@@ -2,15 +2,15 @@ import * as bounties from "./bounty.js";
 
 export let bountyList = bounties;
 
-let board = document.getElementById("board");
+let panel = document.getElementById("panel");
 
 document.addEventListener("keydown", (e) => {
     if (e.key == ' ') {
-        if (board.classList.contains("closed")) {
-            board.classList.remove("closed");
+        if (panel.classList.contains("closed")) {
+            panel.classList.remove("closed");
         }
         else {
-            board.classList.add("closed");
+            panel.classList.add("closed");
         }
     }
 });

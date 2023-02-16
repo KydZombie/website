@@ -3,12 +3,11 @@
 @import url(bounties.css);
 
 body {
-    background: lightblue;
     margin: 0;
     position: fixed;
 }
 
-#board {
+#panel {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -18,7 +17,7 @@ body {
     transition: transform .5s ease;
 }
 
-#board.closed {
+#panel.closed {
     transform: translateX(-100%);
 }
 
@@ -27,6 +26,15 @@ body {
     display: grid;
     width: 100%;
     flex: 1;
+}
+
+#gamescreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: lightblue;
 }
 
 [hidden] {
