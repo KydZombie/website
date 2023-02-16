@@ -1,10 +1,9 @@
 {
-    "quid": "Quid",
     "ui": {
-        "requirement": "Requirements:",
-        "reward": "Rewards:",
-        "punishment": "Punishments:",
-        "timeLimit": "Time Limit:",
+        "requirement": "Requirements",
+        "reward": "Rewards",
+        "punishment": "Punishments",
+        "timeLimit": "Time Limit",
         "unlock": "Unlock"
     },
     "requirement": {
@@ -21,5 +20,8 @@
             "manualMining": "Manual Mining",
             "refining": "Refining Your Ores"
         }
+    },
+    "unlock": {
+        "refinery": "Refinery"
     }
 }

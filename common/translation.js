@@ -5,7 +5,7 @@ let keys = [];
 
 export async function registerAllTranslations(jsonUrl) {
     if (!jsonUrl) {
-        jsonUrl = "translation.json";
+        jsonUrl = "lang/en.json";
     }
     translationJson = await jsonLoader.getJson(jsonUrl)
     Object.assign(keys, translationJson);
@@ -26,16 +26,35 @@ export function translate(key) {
 }
 
 
-async function asyncTranslate(key) {
+export async function asyncTranslate(key) {
     let json = await translationJson;
     if (key.includes('.')) {
         return await jsonLoader.traverseJson(json, key);
     }
+    else {
+        return translate(key);
+    }
 }
 
-export async function translateElement(element, key, append) {
-    if (!append) {
-        append = "";
+function format(fmt, ...args) {
+    if (!fmt.match(/^(?:(?:(?:[^{}]|(?:\{\{)|(?:\}\}))+)|(?:\{[0-9]+\}))+$/)) {
+        throw new Error('invalid format string.');
     }
-    element.innerHTML = await asyncTranslate(key) + append;
+    return fmt.replace(/((?:[^{}]|(?:\{\{)|(?:\}\}))+)|(?:\{([0-9]+)\})/g, (m, str, index) => {
+        if (str) {
+            return str.replace(/(?:{{)|(?:}})/g, m => m[0]);
+        } else {
+            if (index >= args.length) {
+                throw new Error('argument index is out of range in format');
+            }
+            return args[index];
+        }
+    });
+}
+
+export async function translateElement(element, ...args) {
+    for (let i = 0; i < args.length; i++) {
+        args[i] = await args[i];
+    }
+    element.innerHTML = args.join("");
 }

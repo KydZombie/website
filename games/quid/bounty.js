@@ -37,12 +37,15 @@ class Bounty {
         bounties[name] = this;
     }
     createBountyIcon(json) {
+        let atl = translator.asyncTranslate;
+        let te = translator.translateElement;
+        
         this.element = document.createElement("div");
         this.element.classList.add("bounty");
         this.element.dataset.bounty = this.name;
 
         let name = document.createElement("h1");
-        translator.translateElement(name, "bounty." + this.name);
+        te(name, atl(`bounty.${this.name}`));
         this.element.appendChild(name);
 
         this.addJsonPart(json.requirements, "requirement");
@@ -55,16 +58,19 @@ class Bounty {
     addJsonPart(part, partName) {
         if (!part) return;
 
+        let atl = translator.asyncTranslate;
+        let te = translator.translateElement;
+
         if (Object.keys(part).length == 0) {
             let oneShot = document.createElement("p");
             oneShot.classList.add(partName.toLowerCase());
-            translator.translateElement(oneShot, `ui.${partName}`, " " + part);
+            te(oneShot, atl(`ui.${partName}`), ": ", part);
             this.element.appendChild(oneShot);
             return;
         }
 
         let newPartText = document.createElement("p");
-        translator.translateElement(newPartText, `ui.${partName}`);
+        te(newPartText, atl(`ui.${partName}`), ":");
         this.element.appendChild(newPartText);
 
         let newParts = JSON.parse(JSON.stringify(part));
@@ -72,7 +78,7 @@ class Bounty {
             part.abstract.forEach(key => {
                 let requirement = document.createElement("p");
                 requirement.classList.add("indented");
-                translator.translateElement(requirement, `requirement.${key}`);
+                te(requirement, atl(`requirement.${key}`));
                 this.element.appendChild(requirement);
             });
             delete newParts.abstract;
@@ -81,10 +87,10 @@ class Bounty {
             let requirement = document.createElement("p");
             requirement.classList.add("indented");
             if (key == "unlock") {
-                translator.translateElement(requirement, `ui.${key}`, ": " + part[key]);
+                te(requirement, atl(`ui.${key}`), ": ", atl(`unlock.${part[key]}`));
             }
             else {
-                translator.translateElement(requirement, `${key}`, ": " + part[key]);
+                te(requirement, atl(key), ": ", part[key]);
             }
             this.element.appendChild(requirement);
         });
@@ -140,9 +146,9 @@ class Bounty {
         this.isReady = tempIsReady || this.isReady;
     }
     updateTimeRemaining() {
-        translator.translateElement(this.element.getElementsByClassName("timelimit").item(0), "ui.timeLimit", " " + this.timeRemaining);
-        // this.element.getElementsByClassName("timelimit").item(0)
-        //     .innerHTML = `${translator.translate("timeLimit")} ${this.timeRemaining}`;
+        let atl = translator.asyncTranslate;
+        let te = translator.translateElement;
+        te(this.element.getElementsByClassName("timelimit").item(0), atl("ui.timeLimit"), ": ", this.timeRemaining);
     }
     setReady() {
         this.isReady = true;
@@ -150,8 +156,8 @@ class Bounty {
         this.element.classList.add("ready");
     }
     fail() {
-        if (!this.key.includes("random")) {
-            addBounty(this.key);
+        if (!this.name.includes("random")) {
+            addBounty(this.name);
         }
         for (const punishment in this.punishments) {
             if (Object.hasOwnProperty.call(this.punishments, punishment)) {
