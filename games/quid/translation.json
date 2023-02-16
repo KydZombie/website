@@ -1,0 +1,25 @@
+{
+    "quid": "Quid",
+    "ui": {
+        "requirement": "Requirements:",
+        "reward": "Rewards:",
+        "punishment": "Punishments:",
+        "timeLimit": "Time Limit:",
+        "unlock": "Unlock"
+    },
+    "requirement": {
+        "click": "Click This"
+    },
+    "item": {
+        "quid": "Quid",
+        "copperOre": "Copper Ore",
+        "copperBar": "Copper Bar"
+    },
+    "bounty": {
+        "tutorial": {
+            "startingOut": "Starting Out",
+            "manualMining": "Manual Mining",
+            "refining": "Refining Your Ores"
+        }
+    }
+}
