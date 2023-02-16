@@ -8,8 +8,7 @@
             "rewards": {
                 "item.quid": 50
             },
-            "linkTo": "tutorial.manualMining",
-            "timeLimit": 2
+            "linkTo": "tutorial.manualMining"
         },
         "manualMining": {
             "description": "To start making resources, click on the Manual Miner you have to generate some copper.",
