@@ -1,33 +1,11 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PageList = void 0;
-const jsonLoader = __importStar(require("./json-loader"));
-const cursor = __importStar(require("./cursor"));
-class PageList {
+import * as jsonLoader from "./json-loader.js";
+import * as cursor from "./cursor.js";
+class PageJson {
+}
+export class PageList {
     constructor(jsonUrl, listContainer, infoText) {
+        this.pageListElements = [];
+        this.pages = [];
         this.jsonUrl = jsonUrl;
         this.listContainer = listContainer;
         this.infoText = infoText;
@@ -36,7 +14,7 @@ class PageList {
             this.loadPageLists();
         }).then(() => {
             if (this.runAfter) {
-                this.runAfter(pages);
+                this.runAfter(this.pages);
             }
         });
     }
@@ -46,13 +24,13 @@ class PageList {
         let pageLists = Object.keys(this.pageJson);
         for (let pageListIndex = 0; pageListIndex < pageLists.length; pageListIndex++) {
             const list = pageLists[pageListIndex];
-            pageListElements[pageListIndex] = this.loadPageList(list, pageListIndex == 0);
-            this.listContainer.appendChild(pageListElements[pageListIndex]);
+            this.pageListElements[pageListIndex] = this.loadPageList(list, pageListIndex == 0);
+            this.listContainer.appendChild(this.pageListElements[pageListIndex]);
         }
         if (cursor) {
-            cursor.addHoveringToAll(pages);
+            cursor.addHoveringToAll(this.pages);
         }
-        pages.forEach(page => {
+        this.pages.forEach(page => {
             let pageData = page.dataset;
             if (pageData.description != null && this.infoText) {
                 page.addEventListener("mouseenter", () => {
@@ -62,8 +40,8 @@ class PageList {
             }
             if (pageData.referenceList != null) {
                 page.addEventListener("mouseenter", () => {
-                    for (let i = 1; i < pageListElements.length; i++) {
-                        const pageList = pageListElements[i];
+                    for (let i = 1; i < this.pageListElements.length; i++) {
+                        const pageList = this.pageListElements[i];
                         if (pageList.id == pageData.referenceList) {
                             pageList.hidden = false;
                         }
@@ -113,10 +91,7 @@ class PageList {
                 pageElement.dataset[key] = this.pageJson[listKey][pageKey][key];
             }
         });
-        pages.push(pageElement);
+        this.pages.push(pageElement);
         return pageElement;
     }
 }
-exports.PageList = PageList;
-let pageListElements = [];
-let pages = [];

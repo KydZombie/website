@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.setMode = exports.addHoveringToTag = exports.addHoveringToAll = exports.addHovering = exports.setStatus = void 0;
 let BALL_COUNT = 20;
 let BALL_SIZE = 15;
 let cursorDiv = document.body.appendChild(document.createElement("div"));
@@ -34,7 +31,7 @@ setInterval(() => {
     }
 }, 5);
 // TODO Multiple colors
-function setStatus(status) {
+export function setStatus(status) {
     if (status) {
         cursorDiv.classList.add("hovering");
     }
@@ -42,26 +39,21 @@ function setStatus(status) {
         cursorDiv.classList.remove("hovering");
     }
 }
-exports.setStatus = setStatus;
-function addHovering(element) {
+export function addHovering(element) {
     element.addEventListener("mouseenter", () => setStatus(true));
     element.addEventListener("mouseleave", () => setStatus(false));
 }
-exports.addHovering = addHovering;
-function addHoveringToAll(elements) {
+export function addHoveringToAll(elements) {
     elements.forEach(element => {
         addHovering(element);
     });
 }
-exports.addHoveringToAll = addHoveringToAll;
-function addHoveringToTag(filter) {
+export function addHoveringToTag(filter) {
     addHoveringToAll(Array.from(document.querySelectorAll(filter)));
 }
-exports.addHoveringToTag = addHoveringToTag;
 // TODO Enum
-function setMode(mode) {
+export function setMode(mode) {
     if (mode == "space") {
         cursorBalls.slice(1).forEach(ball => ball.style.transition = '.25s');
     }
 }
-exports.setMode = setMode;

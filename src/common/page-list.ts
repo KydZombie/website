@@ -1,11 +1,17 @@
-import * as jsonLoader from "./json-loader";
-import * as cursor from "./cursor";
+import * as jsonLoader from "./json-loader.js";
+import * as cursor from "./cursor.js";
+
+class PageJson {
+  [key: string]: any;
+}
 
 export class PageList {
   jsonUrl: string;
   listContainer: HTMLElement;
   infoText: HTMLElement;
-  pageJson?: Record<string, string>;
+  pageListElements: HTMLElement[] = [];
+  pages: HTMLElement[] = [];
+  pageJson?: PageJson;
   runAfter?: Function;
 
   constructor(jsonUrl: string, listContainer: HTMLElement, infoText: HTMLElement) {
@@ -18,7 +24,7 @@ export class PageList {
       this.loadPageLists();
     }).then(() => {
       if (this.runAfter) {
-        this.runAfter(pages);
+        this.runAfter(this.pages);
       }
     });
   }
@@ -28,15 +34,15 @@ export class PageList {
   
     for (let pageListIndex = 0; pageListIndex < pageLists.length; pageListIndex++) {
       const list = pageLists[pageListIndex];
-      pageListElements[pageListIndex] = this.loadPageList(list, pageListIndex == 0)!;
-      this.listContainer.appendChild(pageListElements[pageListIndex]);
+      this.pageListElements[pageListIndex] = this.loadPageList(list, pageListIndex == 0)!;
+      this.listContainer.appendChild(this.pageListElements[pageListIndex]);
     }
   
     if (cursor) {
-      cursor.addHoveringToAll(pages);
+      cursor.addHoveringToAll(this.pages);
     }
   
-    pages.forEach(page => {
+    this.pages.forEach(page => {
       let pageData = page.dataset;
       if (pageData.description != null && this.infoText) {
         page.addEventListener("mouseenter", () => {
@@ -46,8 +52,8 @@ export class PageList {
       }
       if (pageData.referenceList != null) {
         page.addEventListener("mouseenter", () => {
-          for (let i = 1; i < pageListElements.length; i++) {
-            const pageList = pageListElements[i];
+          for (let i = 1; i < this.pageListElements.length; i++) {
+            const pageList = this.pageListElements[i];
             if (pageList.id == pageData.referenceList) {
               pageList.hidden = false;
             } else {
@@ -95,13 +101,10 @@ export class PageList {
   
     keys.forEach(key => {
       if (key != "link") {
-        pageElement.dataset[key] = this.pageJson[listKey][pageKey][key];
+        pageElement.dataset[key] = this.pageJson![listKey][pageKey][key];
       }
     })
-    pages.push(pageElement);
+    this.pages.push(pageElement);
     return pageElement;
   }
 }
-
-let pageListElements: HTMLElement[] = [];
-let pages: HTMLElement[] = [];

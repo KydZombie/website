@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,17 +7,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.traverseJson = exports.getJson = void 0;
-function getJson(url) {
+export function getJson(url) {
     return __awaiter(this, void 0, void 0, function* () {
         let response = yield fetch(url);
         let data = yield response.json();
         return data;
     });
 }
-exports.getJson = getJson;
-function traverseJson(json, path) {
+export function traverseJson(json, path) {
     return __awaiter(this, void 0, void 0, function* () {
         let directory = path.split(".").reverse();
         let currentObj = yield json;
@@ -30,4 +26,3 @@ function traverseJson(json, path) {
         return currentObj;
     });
 }
-exports.traverseJson = traverseJson;

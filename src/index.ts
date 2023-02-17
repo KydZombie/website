@@ -1,4 +1,4 @@
-import { PageList } from "./common/page-list";
+import { PageList } from "./common/page-list.js";
 
 new PageList(
   "pages.json", 
