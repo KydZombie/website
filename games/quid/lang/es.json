@@ -12,7 +12,7 @@
     },
     "item": {
         "quid": "Quid",
-        "copperOre": "Mina de Cobre",
+        "copperRaw": "Mina de Cobre",
         "copperBar": "Lingote de Cobre"
     },
     "bounty": {

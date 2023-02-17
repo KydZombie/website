@@ -1,53 +1,22 @@
-import * as cursor from "../../common/cursor.js";
+import * as state from "./state.js";
 import * as translator from "../../common/translation.js";
 import * as panel from "./panel.js";
+import * as items from "./items.js";
+import * as buildings from "./buildings.js";
+import * as gameObjects from "./gameObject.js";
+import * as bounties from "./bounty.js";
 import * as world from "./world.js";
-import * as materials from "./materials.js";
 
-let canvas = document.getElementById("gamescreen");
-
-/** @type {CanvasRenderingContext2D} */
-let ctx = canvas.getContext("2d");
-
-let bounties = panel.bountyList;
-
-let buildings = {
-
-}
-
-class State {
-    constructor() {
-        this.cursor = cursor;
-        this.obtained = {};
-        this.quid = 0;
-        this.buildings = buildings;
-        this.canvas = canvas;
-        this.ctx = ctx;
-        this.world = world;
-    }
-    gainQuid(gain) {
-        this.quid += gain;
-    }
-    loseQuid(loss) {
-        this.quid -= loss;
-    }
-}
-
-let state = new State;
-
-class Building {
-    constructor() {
-    }
-    click() {
-
-    }
-    update() {
-
-    }
-}
+let canvas = state.canvas;
 
 function init() {
     translator.registerAllTranslations().then(() => start());
+    state.setBounties(bounties);
+    state.setBuildings(buildings);
+    state.setWorld(world);
+    state.setPanel(panel);
+    state.setItems(items);
+    state.setGameObjects(gameObjects);
 }
 
 function resizeScreen() {
@@ -56,10 +25,11 @@ function resizeScreen() {
 }
 
 function start() {
-    bounties.setState(state);
-    bounties.addBounty("tutorial.startingOut");
+    buildings.createBuildings();
+    
+    world.initWorld();
 
-    world.setState(state);
+    bounties.addBounty("tutorial.startingOut");
 
     resizeScreen();
 
@@ -85,7 +55,6 @@ function update() {
 
 function draw() {
     resizeScreen();
-    
 }
 
 init();

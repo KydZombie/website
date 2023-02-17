@@ -1,3 +1,4 @@
+import * as state from "./state.js";
 import * as translator from "../../common/translation.js";
 import * as jsonLoader from "../../common/json-loader.js";
 
@@ -6,9 +7,8 @@ let bountyJson = jsonLoader.getJson("bounties.json");
 let bountyLimit = 4;
 
 let bountyHolder = document.getElementById("bounties");
-let bounties = [];
+let bountyList = [];
 
-let state;
 
 class Bounty {
     constructor(json, name) {
@@ -34,7 +34,7 @@ class Bounty {
 
         bountyHolder.appendChild(this.element);
 
-        bounties[name] = this;
+        bountyList[name] = this;
     }
     createBountyIcon(json) {
         let atl = translator.asyncTranslate;
@@ -174,7 +174,7 @@ class Bounty {
     }
     dismiss() {
         bountyHolder.removeChild(this.element);
-        delete bounties[this.key];
+        delete bountyList[this.key];
     }
     startTimer() {
         let intervalNum = setInterval(() => {
@@ -194,11 +194,11 @@ class Bounty {
 }
 
 export function getBounties() {
-    return bounties;
+    return bountyList;
 }
 
 export async function addBounty(key) {
-    if (bounties.length >= bountyLimit) {
+    if (bountyList.length >= bountyLimit) {
         return;
     }
 
@@ -218,9 +218,9 @@ export async function addRandomBounty(bountyCollection) {
 }
 
 export function checkAll() {
-    for (const key in bounties) {
-        if (Object.hasOwnProperty.call(bounties, key)) {
-            const bounty = bounties[key];
+    for (const key in bountyList) {
+        if (Object.hasOwnProperty.call(bountyList, key)) {
+            const bounty = bountyList[key];
             bounty.updateStatus();
         }
     }
@@ -236,8 +236,4 @@ function isGlobalRequirementFulfilled(type, amount) {
 
     }
     return false;
-}
-
-export function setState(newState) {
-    state = newState;
 }

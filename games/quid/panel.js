@@ -1,6 +1,5 @@
-import * as bounties from "./bounty.js";
-
-export let bountyList = bounties;
+import * as state from "./state.js";
+state.setPanel(this);
 
 let panel = document.getElementById("panel");
 

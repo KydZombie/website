@@ -13,7 +13,7 @@
         "manualMining": {
             "description": "To start making resources, click on the Manual Miner you have to generate some copper.",
             "requirements": {
-                "item.copperOre": 5
+                "item.copperRaw": 5
             },
             "rewards": {
                 "unlock": "refinery",
@@ -24,7 +24,7 @@
         "refining": {
             "description": "Now that you have a refiner, you can start getting more from your resources",
             "requirements": {
-                "copperBar": 5
+                "item.copperBar": 5
             },
             "rewards": {
                 "unlock": "autoMiner",
@@ -40,7 +40,7 @@
         "basic": {
             "description": "To start making resources, click on the Manual Miner you have to generate some copper.",
             "requirements": {
-                "copperOre": 5
+                "item.copperRaw": 5
             },
             "rewards": {
                 "unlock": "refinery",
@@ -54,7 +54,7 @@
         "basic2": {
             "description": "To start making resources, click on the Manual Miner you have to generate some copper.",
             "requirements": {
-                "copperOre": 5
+                "item.copperRaw": 5
             },
             "rewards": {
                 "unlock": "refinery",

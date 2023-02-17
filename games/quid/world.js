@@ -1,10 +1,10 @@
-let state;
-let canvas;
-let ctx;
+import * as state from "./state.js";
 
-const WORLD_SIZE = 50;
-let tileSize = 50;
-let offset = 0;
+let canvas = state.canvas;
+let ctx = state.ctx;
+
+const WORLD_SIZE = state.WORLD_SIZE;
+let tileSize = state.tileSize;
 
 let layout = [];
 for (let x = 0; x < WORLD_SIZE; x++) {
@@ -14,48 +14,47 @@ for (let x = 0; x < WORLD_SIZE; x++) {
     }
 }
 
-layout[0][5] = "t";
-
-function setTile(x, y, set) {
-    layout[x][y] = set;
+export function initWorld() {
+    // setTile(0, 0, "ore");
 }
 
-function getTile(x, y) {
+export function setTile(x, y, set) {
+    let tile = state.buildings.spawnBuilding(set, x, y);
+    layout[x][y] = tile;
+}
+
+export function getTile(x, y) {
     return layout[x][y];
 }
 
 export function click(mouseX, mouseY) {
-    console.log(`Mouse X: ${mouseX} Y: ${mouseY}`)
     let tileX = Math.floor(mouseX / tileSize);
     let tileY = Math.floor(mouseY / tileSize);
-    setTile(tileX, tileY, "s")
+    setTile(tileX, tileY, "ore");
 }
 
-function getTileFromMouse(x, y) {
-    return checkMouseClick(x, y);
+export function getTileFromMouse(mouseX, mouseY) {
+    let tileX = Math.floor(mouseX / tileSize);
+    let tileY = Math.floor(mouseY / tileSize);
+    return getTile(tileX, tileY);
 }
 
+// TODO this
 function setUpMouseClickAvailability() {
 
 }
 
-export function setState(newState) {
-    state = newState;
-    canvas = state.canvas;
-    ctx = state.ctx;
-}
-
 export function drawWorld() {
-    let ctx = state.ctx;
+    ctx.fillStyle = "green";
+    ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
     for (let x = 0; x < WORLD_SIZE; x++) {
         for (let y = 0; y < WORLD_SIZE; y++) {
-            if (getTile(x, y) != null) {
-                ctx.fillStyle = "lightblue";
+            /** @type {Building} */
+            let tile = getTile(x, y)
+            if (tile != null) {
+                tile.drawOnGrid();
             }
-            else {
-                ctx.fillStyle = "gray"
-            }
-            ctx.fillRect(offset + (x * tileSize), offset + (y * tileSize), tileSize, tileSize);
         }
     }
 }
+

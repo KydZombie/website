@@ -12,8 +12,8 @@
     },
     "item": {
         "quid": "Quid",
-        "copperOre": "Copper Ore",
-        "copperBar": "Copper Bar"
+        "copperRaw": "Raw Copper",
+        "copperBar": "Copper Ingot"
     },
     "bounty": {
         "tutorial": {
