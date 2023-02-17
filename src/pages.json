@@ -1,0 +1,69 @@
+{
+    "mainList": {
+        "Games": {
+            "description": "Games I've made",
+            "referenceList": "gamesList"
+        },
+        "Cards": {
+            "description": "A little cards program with many capabilities",
+            "referenceList": "cardsList"
+        },
+        "Misc. Projects": {
+            "description": "Other projects that I've done, including those not on the web.",
+            "referenceList": "projectsList"
+        },
+        "Tests": {
+            "description": "All of my test websites.",
+            "referenceList": "testsList"
+        },
+        "About": {
+            "description": "About me",
+            "referenceList": "aboutList"
+        },
+        "Other": {
+            "description": "Haha funny",
+            "referenceList": "otherList"
+        }
+    },
+    "gamesList": {
+        "Quid Pro Quo": {
+            "description": "A tycoon-style game made for one of my classes.",
+            "link": "/games/quid/"
+        }
+    },
+    "cardsList": {
+        "Cards": {
+            "description": "A basic card program.",
+            "link": "/cards/"
+        },
+        "Wiki Cards": {
+            "description": "Cards, but with random Wikipedia pages.",
+            "link": "/cards/wiki/"
+        }
+    },
+    "projectsList": {
+        "This Page": {
+            "description": "Yeah"
+        }
+    },
+    "testsList": {
+        "WebGL": {
+            "description": "A basic test of WebGL",
+            "link": "/tests/webgl/"
+        }
+    },
+    "aboutList": {
+        "Who?": {
+            "description": "Me"
+        },
+        "Why?": {
+            "description": "Because I can"
+        }
+    },
+    "otherList": {
+        "Secret": {
+            "description": "Ooooh!",
+            "onClick": "cursor.setMode('space');"
+        }
+    }
+}

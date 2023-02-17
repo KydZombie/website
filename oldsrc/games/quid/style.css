@@ -1,0 +1,42 @@
+@import url(/common/cursor.css);
+@import url(/common/fonts.css);
+@import url(bounties.css);
+
+body {
+    margin: 0;
+    position: fixed;
+}
+
+#panel {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    transform-origin: center;
+    width: 300px;
+    height: 100vh;
+    transition: transform .5s ease;
+}
+
+#panel.closed {
+    transform: translateX(-100%);
+}
+
+#shop {
+    background:gainsboro;
+    display: grid;
+    width: 100%;
+    flex: 1;
+}
+
+#gamescreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: lightblue;
+}
+
+[hidden] {
+    display:none;
+}

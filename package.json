@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "typescript": "^4.9.5",
+    "typescript-cp": "^0.1.7"
+  },
+  "scripts": {
+    "start": "tsc -w & tscp -w",
+    "build": "tsc && tscp"
+  }
+}
