@@ -8,7 +8,7 @@ export async function getJson(url: string): Promise<ParsedJson> {
     return data;
 }
 
-export async function traverseJson(json: Record<string, unknown>, path: string): Promise<any> {
+export async function traverseJson(json: ParsedJson, path: string): Promise<any> {
     let directory = path.split(".").reverse();
 
     let currentObj = json;

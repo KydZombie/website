@@ -3,7 +3,7 @@ import * as jsonLoader from "./json-loader.js";
 let translationJson: jsonLoader.ParsedJson;
 let keys: jsonLoader.ParsedJson = [];
 
-export async function registerAllTranslations(jsonUrl: string) {
+export async function registerAllTranslations(jsonUrl?: string) {
     if (!jsonUrl) {
         let lang = navigator.language.substring(0, 2); // let user change this too.
         jsonUrl = `lang/${lang}.json`;
@@ -30,7 +30,7 @@ export async function asyncTranslate(key: string): Promise<string> {
     else return keys[key];
 }
 
-export async function translateElement(element: HTMLElement, ...args: Promise<string>[]) {
+export async function translateElement(element: HTMLElement, ...args: Array<Promise<string> | string>) {
     let awaitedArgs: string[] = [];
     for (let i = 0; i < args.length; i++) {
         awaitedArgs[i] = await args[i];
