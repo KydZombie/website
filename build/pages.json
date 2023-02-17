@@ -28,17 +28,17 @@
     "gamesList": {
         "Quid Pro Quo": {
             "description": "A tycoon-style game made for one of my classes.",
-            "link": "/games/quid/"
+            "link": "games/quid/"
         }
     },
     "cardsList": {
         "Cards": {
             "description": "A basic card program.",
-            "link": "/cards/"
+            "link": "cards/"
         },
         "Wiki Cards": {
             "description": "Cards, but with random Wikipedia pages.",
-            "link": "/cards/wiki/"
+            "link": "cards/wiki/"
         }
     },
     "projectsList": {
@@ -49,7 +49,7 @@
     "testsList": {
         "WebGL": {
             "description": "A basic test of WebGL",
-            "link": "/tests/webgl/"
+            "link": "tests/webgl/"
         }
     },
     "aboutList": {

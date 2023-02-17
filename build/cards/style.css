@@ -1,5 +1,5 @@
-@import url(/common/cursor.css);
-@import url(/common/footer.css);
+@import url(../common/cursor.css);
+@import url(../common/footer.css);
 
 body {
   background: black;

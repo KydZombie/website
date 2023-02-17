@@ -1,5 +1,6 @@
-import * as cursor from "/common/cursor.js";
+import * as cursor from "../common/cursor.js";
 
+// TODO Convert properly to TS
 const [backEl, showEl, hideEl, nextEl, moreEl, lessEl] = document.querySelectorAll(
   '#cardbuttons button'
 );
