@@ -17,7 +17,7 @@ export function getJson(url) {
 export function traverseJson(json, path) {
     return __awaiter(this, void 0, void 0, function* () {
         let directory = path.split(".").reverse();
-        let currentObj = yield json;
+        let currentObj = json;
         while (directory.length > 0) {
             let thing = directory.pop();
             console.log();

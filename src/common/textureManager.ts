@@ -1,6 +1,10 @@
-let cache = [];
+class ImageCache {
+    [key: string]: any;
+}
 
-export function getTexture(textureId) {
+let cache: ImageCache = [];
+
+export function getTexture(textureId: string): HTMLImageElement {
     if (!cache[textureId]) {
         let cachedImage = new Image();
         cachedImage.src = textureId;
