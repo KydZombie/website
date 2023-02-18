@@ -40,6 +40,9 @@ export class BountiesContainer {
                 throw new Error("requirement with name " + requirement.name + " not found, have you forgot to add it to `useRequirement` ?");
             requirementsInstances.push(new reqType(this, requirement.args));
         });
+        if (bountyDefinition.timeLeft) {
+            // START TIMER
+        }
         this.activeBounties.push(new Bounty(requirementsInstances));
     }
     update() {

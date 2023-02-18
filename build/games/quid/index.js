@@ -13,13 +13,12 @@ import * as translator from "../../common/translation.js";
 import { sprites } from "./sprite.js";
 import { World } from "./world.js";
 import * as panel from "./panel.js";
-import { BountyLoader } from "./actions/bounty-loader.js";
 import { BountiesContainer } from "./actions/bounties-container.js";
 import { ItemRequirement } from "./actions/requirements/item-requirement.js";
 import { ClickRequirement } from "./actions/requirements/click-requirement.js";
 class State {
-    constructor(actions) {
-        this.actions = actions;
+    constructor(bounties) {
+        this.bounties = bounties;
         this.obtained = {};
         this.quid = 0;
         this.canvas = document.getElementById("gamescreen");
@@ -28,31 +27,30 @@ class State {
         this.sprites = sprites;
         this.panel = panel;
         this.resizeScreen();
-        this.loopInterval = setInterval(() => {
+        this.loopIndex = setInterval(() => {
             this.gameLoop();
         }, 0);
-        actions.loadBounty("tutorial", "startingOut");
+        bounties.loadBounty("tutorial", "startingOut");
     }
     static init() {
         return __awaiter(this, void 0, void 0, function* () {
             yield translator.registerAllTranslations();
-            const bounties = yield BountyLoader.load("./bounties.json");
-            const panel = document.getElementById("panel");
-            if (!panel)
-                throw new Error("Panel HTML element not found");
-            const actions = new BountiesContainer(panel, bounties);
-            actions.useRequirement("item", ItemRequirement);
-            actions.useRequirement("click", ClickRequirement);
-            return new State(actions);
+            const bountyBoard = document.getElementById("bountyboard");
+            if (!bountyBoard)
+                throw new Error("Bounty Board HTML element not found");
+            const bounties = yield BountiesContainer.load("./bounties.json", bountyBoard);
+            bounties.useRequirement("item", ItemRequirement);
+            bounties.useRequirement("click", ClickRequirement);
+            return new State(bounties);
         });
     }
     gameLoop() {
-        // this.update();
+        this.update();
         this.draw();
     }
     update() {
         this.panel.updateBounties();
-        this.actions.update();
+        this.bounties.update();
     }
     draw() {
         this.resizeScreen();
