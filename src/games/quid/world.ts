@@ -1,11 +1,11 @@
-import * as data from "./data.js";
 import * as vector from "../../common/vector.js";
+import { Building, BuildingData, buildings } from "./buildings.js";
 
 const WORLD_SIZE = 50;
 const DEFAULT_TILE_SIZE = 50;
 
-class World {
-    layout = new Array<Array<data.Building | null>>;
+export class World {
+    layout = new Array<Array<Building | null>>;
     
     worldSize = WORLD_SIZE;
     tileSize = DEFAULT_TILE_SIZE;
@@ -20,12 +20,11 @@ class World {
         }
     }
 
-    setTile(set: string | data.BuildingData, xOrPos: vector.Pos | number, y: number) {
-        if (set instanceof data.BuildingData) {
+    setTile(set: string | BuildingData, xOrPos: vector.Pos | number, y: number) {
+        if (set instanceof BuildingData) {
             set.spawn(xOrPos, y);
-        }
-        else {
-            data.buildings[set].spawn(xOrPos, y);
+        } else {
+            buildings.get(set)!.spawn(xOrPos, y);
         }
     }
     
@@ -49,14 +48,14 @@ class World {
         
     }
 
-    draw(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-        ctx.fillStyle = "green";
-        ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    draw() {
+        window.state.ctx.fillStyle = "green";
+        window.state.ctx.fillRect(0, 0, window.state.canvas.clientWidth, window.state.canvas.clientHeight);
         for (let x = 0; x < WORLD_SIZE; x++) {
             for (let y = 0; y < WORLD_SIZE; y++) {
                 let tile = this.getTile(x, y)
                 if (tile != null) {
-                    tile.draw(ctx);
+                    tile.draw();
                 }
             }
         }

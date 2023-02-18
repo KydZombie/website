@@ -25,7 +25,7 @@ export function addTranslation(key: string, value: string) {
 
 export async function asyncTranslate(key: string): Promise<string> {
     if (key.includes('.')) {
-        return jsonLoader.traverseJson(translationJson, key);
+        return await jsonLoader.traverseJson(translationJson, key);
     }
     else return keys[key];
 }

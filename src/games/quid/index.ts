@@ -1,67 +1,78 @@
 import * as translator from "../../common/translation.js";
-import * as panel from "./panel.js";
 // import * as items from "./items.js";
 // import * as buildings from "./buildings.js";
-// import * as gameObjects from "./gameObject.js";
-// import * as world from "./world.js";
-import * as vector from "../../common/vector.js";
+import { sprites } from "./sprite.js";
+import { World } from "./world.js";
+import * as panel from "./panel.js";
+import { BountiesContainer } from "./actions/bounties-container.js";
+import { ItemRequirement } from "./actions/requirements/item-requirement.js";
+import { ClickRequirement } from "./actions/requirements/click-requirement.js";
 
 
 
 class State {
-    worldOffset = new vector.Pos(0, 0);
-    obtained = {};
+    private obtained = {};
     quid = 0;
-    canvas = document.getElementById("gamescreen") as HTMLCanvasElement;
-    ctx: CanvasRenderingContext2D;
+    public canvas = document.getElementById("gamescreen") as HTMLCanvasElement;
+    public ctx = (document.getElementById("gamescreen") as HTMLCanvasElement).getContext("2d")!;
     
-    // world = world;
-    // gameObjects = gameObjects;
+    public world = new World();
+    sprites = sprites;
     panel = panel;
 
-    constructor() {
-        this.ctx = this.canvas.getContext("2d")!;
+    private loopIndex: number;
+
+    private constructor(
+        private bounties: BountiesContainer
+    ) {
+        this.resizeScreen();
+        this.loopIndex = setInterval(() => {
+            this.gameLoop();
+        }, 0);
+
+        bounties.loadBounty("tutorial", "startingOut");
     }
 
-    start() {
-        // buildings.createBuildings();
-        
-        // world.initWorld();
-    
-        this.panel.addBounty("tutorial.startingOut");
-    
-        resizeScreen();
-    
-        // this.canvas.addEventListener("click", (e: MouseEvent) => {
-        //     world.click(e.clientX, e.clientY);
-        // });
-    
-        requestAnimationFrame(this.loop);
+    public static async init(): Promise<State> {
+        await translator.registerAllTranslations();
+
+        const bountyBoard = document.getElementById("bountyboard");
+        if(!bountyBoard)
+            throw new Error("Bounty Board HTML element not found");
+
+        const bounties = await BountiesContainer.load("./bounties.json", bountyBoard);
+
+        bounties.useRequirement("item", ItemRequirement);
+        bounties.useRequirement("click", ClickRequirement);
+
+        return new State(bounties);
     }
 
-    loop() {
+    gameLoop() {
         this.update();
         this.draw();
-    
-        // world.drawWorld();
-    
-        requestAnimationFrame(this.loop);
     }
 
     update() {
         this.panel.updateBounties();
+        this.bounties.update();
     }
 
     draw() {
-        resizeScreen();
+        this.resizeScreen();
+        this.world.draw();
+    }
+
+    resizeScreen() {
+        this.canvas.width  = window.innerWidth;
+        this.canvas.height = window.innerHeight;
     }
 }
 
-let state: State;
-
-function resizeScreen() {
-    state.canvas.width  = window.innerWidth;
-    state.canvas.height = window.innerHeight;
+declare global {
+    interface Window { state: State; }
 }
 
-translator.registerAllTranslations().then(() => state = new State());
+(async (): Promise<void> => {
+    window.state = await State.init();
+})();

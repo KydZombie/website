@@ -1,0 +1,50 @@
+{
+    "tutorial": {
+        "startingOut": {
+            "description": "Click on this bounty to get rewards.",
+            "requirements": [
+                { 
+                    "name": "click" 
+                },
+                { 
+                    "name": "item", 
+                    "args": { 
+                        "amount": 50 , 
+                        "itemName": "quid" 
+                    }
+                }
+            ],
+            "rewards": {
+                "item.quid": 50
+            },
+            "linkTo": "tutorial.manualMining"
+        },
+        "manualMining": {
+            "description": "To start making resources, click on the Manual Miner you have to generate some copper.",
+            "requirements": [
+                { "name": "item", "amount": 50 , "itemName": "copperRaw" }
+            ],
+            "rewards": {
+                "unlock": "refinery",
+                "item.quid": 50
+            },
+            "linkTo": "tutorial.refining"
+        },
+        "refining": {
+            "description": "Now that you have a refiner, you can start getting more from your resources",
+            "requirements": [
+                { "name": "item", "amount": 50 , "itemName": "copperBar" }
+            ],
+            "rewards": {
+                "unlock": "autoMiner",
+                "quid": 50
+            },
+            "punishments": {
+                "quid": 50
+            },
+            "otherData": ["endTutorial"]
+        }
+    },
+    "random": {
+    }
+}

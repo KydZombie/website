@@ -1,7 +1,7 @@
 import * as vector from "../../common/vector.js";
 import * as textureManager from "../../common/textureManager.js";
 
-export let gameObjects = new Array<Sprite>;
+export let sprites = new Array<Sprite>;
 
 export class Sprite {
     data: SpriteData;
@@ -23,8 +23,8 @@ export class Sprite {
     update() {
         this.data.update(this);
     }
-    draw(ctx: CanvasRenderingContext2D) {
-        this.data.draw(ctx, this.pos.x, this.pos.y);
+    draw() {
+        this.data.draw(this.pos.x, this.pos.y);
     }
 }
 
@@ -40,17 +40,17 @@ export abstract class SpriteData {
         this.texture = textureManager.getTexture(`assets/${textureId}.png`);
     }
     spawn(xOrPos: number | vector.Pos, y?: number) {
-        gameObjects.push(new Sprite(this, xOrPos, y));
+        sprites.push(new Sprite(this, xOrPos, y));
     }
     registerTexture(texture: HTMLImageElement) {
         this.texture = texture;
     }
-    draw(ctx: CanvasRenderingContext2D, xOrPos: vector.Pos | number, y?: number) {
+    draw(xOrPos: vector.Pos | number, y?: number) {
         if (!this.texture) return;
         if (xOrPos instanceof vector.Pos) {
-            ctx.drawImage(this.texture, xOrPos.x, xOrPos.y);
+            window.state.ctx.drawImage(this.texture, xOrPos.x, xOrPos.y);
         } else if (y != null) {
-            ctx.drawImage(this.texture, xOrPos, y);
+            window.state.ctx.drawImage(this.texture, xOrPos, y);
         }
     }
 

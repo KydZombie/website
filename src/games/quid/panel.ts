@@ -1,7 +1,6 @@
-import * as jsonLoader from "../../common/json-loader";
+import * as jsonLoader from "../../common/json-loader.js";
 import * as translator from "../../common/translation.js";
 import * as cursor from "../../common/cursor.js";
-import * as data from "./data.js";
 
 let panel = document.getElementById("panel")!;
 const bountyLimit = 4;
@@ -21,7 +20,7 @@ document.addEventListener("keydown", (e) => {
 
 let bountyBoard = {
     element: document.getElementById("bounties")!,
-    bounties: new Array<Bounty>()
+    bounties: new Map<string, Bounty>()
 }
 
 interface BountyItem {
@@ -59,9 +58,11 @@ class ItemRequirement extends Requirement {
         this.type = type;
         this.amount = amount;
     }
+    static serialize(value): ItemRequirement {
+
+    }
     updateElementText() {
         translator.translateElement(this.element, translator.asyncTranslate(`item.${this.type}`), ": ", this.amount.toString());
-        this.element.appendChild(this.element);
     }
     checkFulfilled(): boolean {
         throw new Error("Method not implemented.");
@@ -89,6 +90,9 @@ class ItemRequirement extends Requirement {
 // }
 
 abstract class Reward implements BountyItem {
+    serialize(): void {
+        throw new Error("Method not implemented.");
+    }
     element = document.createElement("p");
 
     abstract updateElementText(): void;
@@ -107,7 +111,6 @@ class QuidReward extends Reward {
     }
     updateElementText(): void {
         translator.translateElement(this.element, translator.asyncTranslate(`item.quid`), ": ", this.amount.toString());
-        this.element.appendChild(this.element);
     }
 }
 
@@ -126,6 +129,9 @@ class QuidReward extends Reward {
 // }
 
 abstract class Punishment implements BountyItem {
+    serialize(): void {
+        throw new Error("Method not implemented.");
+    }
     element = document.createElement("p");
     abstract updateElementText(): void;
     addToBoard(sourceElement: HTMLElement): void {
@@ -192,7 +198,7 @@ export class Bounty {
 
         bountyBoard.element.appendChild(this.element);
 
-        bountyBoard.bounties[name] = this;
+        bountyBoard.bounties.set(name, this);
     }
     createBountyIcon(json: jsonLoader.ParsedJson) {
         let atl = translator.asyncTranslate;
@@ -206,14 +212,16 @@ export class Bounty {
         te(name, atl(`bounty.${this.name}`));
         this.element.appendChild(name);
 
-        this.addJsonPart(json.requirements, "requirement");
-        this.addJsonPart(json.rewards, "reward");
-        this.addJsonPart(json.punishments, "punishment");
-        this.addJsonPart(json.timeLimit, "timeLimit");
+        this.addJsonPart(json.requirements, "requirement", {
+            "item": ItemRequirement.serialize,
+        });
+        this.addJsonPart(json.rewards, "reward", {});
+        this.addJsonPart(json.punishments, "punishment", {});
+        this.addJsonPart(json.timeLimit, "timeLimit", {});
 
         cursor.addHovering(this.element);
     }
-    addJsonPart(categoryData: BountyItem[] | BountyItem, categoryName: string) {
+    addJsonPart(categoryData: jsonLoader.ParsedJson, categoryName: string, bountyObjects: {[key: string]: (functionValue: any) => void}) {
         if (!categoryData) return;
 
         let atl = translator.asyncTranslate;
@@ -223,13 +231,18 @@ export class Bounty {
         te(newPartText, atl(`ui.${categoryName}`), ":");
         this.element.appendChild(newPartText);
 
-        if (categoryData instanceof Array) {
-            categoryData.forEach(bounty => {
-                bounty.addToBoard(this.element);
-            });
-        }
-        else {
-            categoryData.addToBoard(this.element);
+        // let keys = Object.keys(categoryData);
+
+        for (const name in categoryData) {
+            if (Object.prototype.hasOwnProperty.call(categoryData, name)) {
+                const value = categoryData[name];
+                let paths = name.split('.');
+                if (paths[0] == "abstract") {
+                    
+                } else {
+                    bountyObjects[paths[0]](value);
+                }
+            }
         }
     }
     onClick() {
@@ -299,7 +312,7 @@ export class Bounty {
         }
         if (this.punishments != undefined) {
             for (const punishment of this.punishments) {
-                punishment.
+                punishment.punish();
             }
         }
         
@@ -312,7 +325,7 @@ export class Bounty {
     }
     dismiss() {
         bountyBoard.element.removeChild(this.element);
-        delete bountyBoard.bounties[this.name];
+        bountyBoard.bounties.delete(this.name);
     }
     startTimer() {
         let intervalNum = setInterval(() => {
@@ -336,7 +349,7 @@ export function getBounties() {
 }
 
 export async function addBounty(key: string) {
-    if (bountyBoard.bounties.length >= bountyLimit) {
+    if (bountyBoard.bounties.size >= bountyLimit) {
         return;
     }
 
@@ -356,7 +369,7 @@ export async function addRandomBounty(bountyCollection?: string) {
 }
 
 export function checkAll() {
-    bountyBoard.bounties.forEach(bounty => {
+    bountyBoard.bounties.forEach((bounty: Bounty) => {
         bounty.updateStatus();
     });
 }

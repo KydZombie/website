@@ -1,0 +1,28 @@
+{
+    "ui": {
+        "bounties": "Bounties",
+        "requirement": "Requirements",
+        "reward": "Rewards",
+        "punishment": "Punishments",
+        "timeLimit": "Time Limit",
+        "unlock": "Unlock"
+    },
+    "requirement": {
+        "click": "Click This"
+    },
+    "item": {
+        "quid": "Quid",
+        "copperRaw": "Raw Copper",
+        "copperBar": "Copper Ingot"
+    },
+    "bounty": {
+        "tutorial": {
+            "startingOut": "Starting Out",
+            "manualMining": "Manual Mining",
+            "refining": "Refining Your Ores"
+        }
+    },
+    "unlock": {
+        "refinery": "Refinery"
+    }
+}
