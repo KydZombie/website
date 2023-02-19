@@ -1,0 +1,60 @@
+@import url(../../common/cursor.css);
+@import url(../../common/fonts.css);
+@import url(./bounties.css);
+@import url(./shop.css);
+
+body {
+    margin: 0;
+    position: relative;
+}
+
+#panel {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr max-content;
+    top: 0;
+    left: 0;
+    transform-origin: center;
+    width: 300px;
+    height: 100vh;
+    transition: transform .5s ease;
+}
+
+#panel.closed {
+    transform: translateX(-100%);
+}
+
+#gamescreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: green;
+    image-rendering: pixelated;
+}
+
+#info {
+    position: absolute;
+    top: 5vh;
+    right: 0;
+    width: fit-content;
+    height: fit-content;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: rgba(171, 171, 171, 0.605);
+    text-align: center;
+}
+
+#quidcounter {
+    color: rgba(0, 0, 0, 0.628);
+    font-family: Potta;
+    font-size: 1.25rem;
+    padding: 0;
+    margin: auto;
+}
+
+[hidden] {
+    display:none;
+}

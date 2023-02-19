@@ -1,0 +1,10 @@
+{
+    "metal": {
+        "variants": ["ore, bar, wire, rod"],
+        "materials": {
+            "copper": {
+                "color": "#B87333"
+            }
+        }
+    }
+}
