@@ -1,11 +1,14 @@
 {
     "ui": {
-        "bounties": "Bounties",
-        "requirement": "Requirements",
-        "reward": "Rewards",
-        "punishment": "Punishments",
-        "timeLimit": "Time Limit",
-        "unlock": "Unlock"
+        "bountyboard": "Bounties",
+        "bounties": "Bounties: ",
+        "shop": "Shop",
+        "requirement": "Requirements: ",
+        "reward": "Rewards: ",
+        "punishment": "Punishments: ",
+        "timeLimit": "Time Limit: ",
+        "unlock": "Unlock: ",
+        "quid": "Quid: "
     },
     "requirement": {
         "click": "Click This"
@@ -13,7 +16,10 @@
     "item": {
         "quid": "Quid",
         "copperRaw": "Raw Copper",
-        "copperBar": "Copper Ingot"
+        "copperBar": "Copper Bar"
+    },
+    "machine": {
+        "autoMiner": "Automatic Miner"
     },
     "bounty": {
         "tutorial": {

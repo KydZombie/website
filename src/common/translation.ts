@@ -30,8 +30,8 @@ export async function asyncTranslate(key: string): Promise<string> {
     else return keys[key];
 }
 
-export async function translateElement(element: HTMLElement, ...args: Array<Promise<string> | string>) {
-    let awaitedArgs: string[] = [];
+export async function translateElement(element: HTMLElement, ...args: Array<Promise<string> | string | number>) {
+    let awaitedArgs: Object[] = [];
     for (let i = 0; i < args.length; i++) {
         awaitedArgs[i] = await args[i];
     }

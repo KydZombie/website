@@ -1,4 +1,4 @@
-import { SpriteData } from "./sprite.js";
+import { SpriteData } from "./sprites/sprite.js";
 const DEFAULT_SIZE = 32;
 export let items = new Map();
 class ItemData extends SpriteData {

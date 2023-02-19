@@ -1,142 +1,13 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import * as jsonLoader from "../../common/json-loader.js";
 import * as translator from "../../common/translation.js";
 import * as cursor from "../../common/cursor.js";
 let panel = document.getElementById("panel");
 const bountyLimit = 4;
 let bountyJson = jsonLoader.getJson("bounties.json");
-document.addEventListener("keydown", (e) => {
-    if (e.key == ' ') {
-        if (panel.classList.contains("closed")) {
-            panel.classList.remove("closed");
-        }
-        else {
-            panel.classList.add("closed");
-        }
-    }
-});
 let bountyBoard = {
     element: document.getElementById("bounties"),
     bounties: new Map()
 };
-class Requirement {
-    constructor() {
-        this.element = document.createElement("p");
-        this.fulfilled = false;
-    }
-    addToBoard(bountyElement) {
-        this.updateElementText();
-        bountyElement.append(this.element);
-    }
-    fulfill() {
-        this.fulfilled = true;
-    }
-    isFulfilled() {
-        if (this.fulfilled)
-            return true;
-        return this.checkFulfilled();
-    }
-}
-class ItemRequirement extends Requirement {
-    constructor(type, amount) {
-        super();
-        this.type = type;
-        this.amount = amount;
-    }
-    static serialize(value) {
-    }
-    updateElementText() {
-        translator.translateElement(this.element, translator.asyncTranslate(`item.${this.type}`), ": ", this.amount.toString());
-    }
-    checkFulfilled() {
-        throw new Error("Method not implemented.");
-    }
-}
-// class ClickRequirement implements Requirement {
-//     element: HTMLParagraphElement;
-//     fulfilled: boolean;
-//     translateElement(): void {
-//         throw new Error("Method not implemented.");
-//     }
-//     checkFulfilled(): boolean {
-//         throw new Error("Method not implemented.");
-//     }
-//     fulfill(): void {
-//         throw new Error("Method not implemented.");
-//     }
-//     isFulfilled(): boolean {
-//         throw new Error("Method not implemented.");
-//     }
-//     addToBoard(bountyElement: HTMLElement): void {
-//     }
-// }
-class Reward {
-    constructor() {
-        this.element = document.createElement("p");
-    }
-    serialize() {
-        throw new Error("Method not implemented.");
-    }
-    addToBoard(sourceElement) {
-        this.updateElementText();
-        sourceElement.append(this.element);
-    }
-}
-class QuidReward extends Reward {
-    constructor(amount) {
-        super();
-        this.amount = amount;
-    }
-    updateElementText() {
-        translator.translateElement(this.element, translator.asyncTranslate(`item.quid`), ": ", this.amount.toString());
-    }
-}
-// class ItemReward extends Reward {
-//     type: string;
-//     amount: number;
-//     constructor(type: string, amount: number) {
-//         super();
-//         this.type = type;
-//         this.amount = amount;
-//     }
-//     updateElementText(): void {
-//         translator.translateElement(this.element, translator.asyncTranslate(`item.${this.type}`), ": ", this.amount.toString());
-//         this.element.appendChild(this.element);
-//     }
-// }
-class Punishment {
-    constructor() {
-        this.element = document.createElement("p");
-    }
-    serialize() {
-        throw new Error("Method not implemented.");
-    }
-    addToBoard(sourceElement) {
-        this.updateElementText();
-        sourceElement.append(this.element);
-    }
-}
-class QuidPunishment extends Punishment {
-    constructor(loss) {
-        super();
-        this.loss = loss;
-    }
-    updateElementText() {
-        translator.translateElement(this.element, translator.asyncTranslate(`item.quid`), ": ", this.loss.toString());
-        this.element.appendChild(this.element);
-    }
-    punish() {
-        console.log(`Would have taken ${this.loss} Quid`);
-    }
-}
 export class Bounty {
     constructor(json, name) {
         this.element = document.createElement("div");
@@ -145,9 +16,7 @@ export class Bounty {
         this.failed = false;
         this.name = name;
         this.description = json.description;
-        this.requirements = json.requirements;
-        this.rewards = json.rewards;
-        this.punishments = json.punishments;
+        // this.punishments = json.punishments;
         this.linkTo = json.linkTo;
         this.timeLimit = json.description;
         this.otherData = json.otherData;
@@ -158,7 +27,6 @@ export class Bounty {
             this.timeRemaining = this.timeLimit;
         }
         this.createBountyIcon(json);
-        this.element.addEventListener("click", () => this.onClick());
         bountyBoard.element.appendChild(this.element);
         bountyBoard.bounties.set(name, this);
     }
@@ -166,14 +34,7 @@ export class Bounty {
         let atl = translator.asyncTranslate;
         let te = translator.translateElement;
         // this.element = document.createElement("div");
-        this.element.classList.add("bounty");
-        this.element.dataset.bounty = this.name;
-        let name = document.createElement("h1");
-        te(name, atl(`bounty.${this.name}`));
-        this.element.appendChild(name);
-        this.addJsonPart(json.requirements, "requirement", {
-            "item": ItemRequirement.serialize,
-        });
+        this.addJsonPart(json.requirements, "requirement", {});
         this.addJsonPart(json.rewards, "reward", {});
         this.addJsonPart(json.punishments, "punishment", {});
         this.addJsonPart(json.timeLimit, "timeLimit", {});
@@ -184,9 +45,6 @@ export class Bounty {
             return;
         let atl = translator.asyncTranslate;
         let te = translator.translateElement;
-        let newPartText = document.createElement("p");
-        te(newPartText, atl(`ui.${categoryName}`), ":");
-        this.element.appendChild(newPartText);
         // let keys = Object.keys(categoryData);
         for (const name in categoryData) {
             if (Object.prototype.hasOwnProperty.call(categoryData, name)) {
@@ -201,51 +59,20 @@ export class Bounty {
         }
     }
     onClick() {
-        if (this.accepted) {
-            if (this.isReady) {
-                this.complete();
-                return;
-            }
-            else if (this.failed) {
-                this.fail();
-                return;
-            }
-            // if (this.requirements) {
-            //     this.requirements.abstract.forEach(bounty => {
-            //         if (bounty == "click") {
-            //             this.setReady();
-            //         }
-            //     });
-            // }
-        }
-        else {
-            this.accept();
-        }
     }
     accept() {
         this.accepted = true;
         this.element.classList.add("accepted");
-        if (this.timeLimit)
-            this.startTimer();
+        // if (this.timeLimit) this.startTimer();
     }
     complete() {
         if (this.linkTo) {
-            addBounty(this.linkTo);
+            // addBounty(this.linkTo);
         }
         if (this.otherData.endTutorial) {
-            addRandomBounty();
+            // addRandomBounty();
         }
         this.dismiss();
-    }
-    updateStatus() {
-        let tempIsReady = true;
-        for (const requirement of this.requirements) {
-            if (!requirement.checkFulfilled()) {
-                tempIsReady = false;
-                return;
-            }
-        }
-        this.isReady = tempIsReady || this.isReady;
     }
     updateTimeRemaining() {
         let atl = translator.asyncTranslate;
@@ -259,13 +86,13 @@ export class Bounty {
     }
     fail() {
         if (!this.name.includes("random")) {
-            addBounty(this.name);
+            // addBounty(this.name);
         }
-        if (this.punishments != undefined) {
-            for (const punishment of this.punishments) {
-                punishment.punish();
-            }
-        }
+        // if (this.punishments != undefined) {
+        //     for (const punishment of this.punishments) {
+        //         punishment.punish();
+        //     }
+        // }
         this.dismiss();
     }
     setFailed() {
@@ -276,49 +103,5 @@ export class Bounty {
         bountyBoard.element.removeChild(this.element);
         bountyBoard.bounties.delete(this.name);
     }
-    startTimer() {
-        let intervalNum = setInterval(() => {
-            if (this.isReady || this.timeRemaining == undefined) {
-                clearInterval(intervalNum);
-            }
-            else if (this.timeRemaining <= 0) {
-                clearInterval(intervalNum);
-                this.setFailed();
-            }
-            else {
-                this.timeRemaining--;
-                this.updateTimeRemaining();
-            }
-        }, 1000);
-    }
 }
-export function getBounties() {
-    return bountyBoard.bounties;
-}
-export function addBounty(key) {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (bountyBoard.bounties.size >= bountyLimit) {
-            return;
-        }
-        let json = yield jsonLoader.traverseJson(bountyJson, key);
-        new Bounty(json, key);
-    });
-}
-export function addRandomBounty(bountyCollection) {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (!bountyCollection) {
-            bountyCollection = "random";
-        }
-        let randomJson = (yield bountyJson)[bountyCollection];
-        let keys = Object.keys(randomJson);
-        let pickedKey = keys[Math.floor(Math.random() * keys.length)];
-        addBounty(`${bountyCollection}.${pickedKey}`);
-    });
-}
-export function checkAll() {
-    bountyBoard.bounties.forEach((bounty) => {
-        bounty.updateStatus();
-    });
-}
-export function updateBounties() {
-}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFuZWwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvZ2FtZXMvcXVpZC9wYW5lbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEtBQUssVUFBVSxNQUFNLDZCQUE2QixDQUFDO0FBQzFELE9BQU8sS0FBSyxVQUFVLE1BQU0sNkJBQTZCLENBQUM7QUFDMUQsT0FBTyxLQUFLLE1BQU0sTUFBTSx3QkFBd0IsQ0FBQztBQUVqRCxJQUFJLEtBQUssR0FBRyxRQUFRLENBQUMsY0FBYyxDQUFDLE9BQU8sQ0FBRSxDQUFDO0FBQzlDLE1BQU0sV0FBVyxHQUFHLENBQUMsQ0FBQztBQUV0QixJQUFJLFVBQVUsR0FBRyxVQUFVLENBQUMsT0FBTyxDQUFDLGVBQWUsQ0FBQyxDQUFDO0FBSXJELElBQUksV0FBVyxHQUFHO0lBQ2QsT0FBTyxFQUFFLFFBQVEsQ0FBQyxjQUFjLENBQUMsVUFBVSxDQUFFO0lBQzdDLFFBQVEsRUFBRSxJQUFJLEdBQUcsRUFBa0I7Q0FDdEMsQ0FBQTtBQUVELE1BQU0sT0FBTyxNQUFNO0lBZ0JmLFlBQVksSUFBMkIsRUFBRSxJQUFZO1FBUHJELFlBQU8sR0FBZ0IsUUFBUSxDQUFDLGFBQWEsQ0FBQyxLQUFLLENBQUUsQ0FBQztRQUl0RCxhQUFRLEdBQUcsS0FBSyxDQUFDO1FBQ2pCLFlBQU8sR0FBRyxLQUFLLENBQUM7UUFDaEIsV0FBTSxHQUFHLEtBQUssQ0FBQztRQUVYLElBQUksQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDO1FBQ2pCLElBQUksQ0FBQyxXQUFXLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQztRQUNwQyx1Q0FBdUM7UUFDdkMsSUFBSSxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDO1FBQzFCLElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQztRQUNsQyxJQUFJLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUM7UUFFaEMsSUFB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

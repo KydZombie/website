@@ -5,45 +5,85 @@
             "requirements": [
                 { 
                     "name": "click" 
-                },
+                }
+            ],
+            "rewards": [
                 { 
-                    "name": "item", 
+                    "name": "quid", 
                     "args": { 
-                        "amount": 50 , 
-                        "itemName": "quid" 
+                        "amount": 50
                     }
                 }
             ],
-            "rewards": {
-                "item.quid": 50
-            },
-            "linkTo": "tutorial.manualMining"
+            "linkTo": {
+                "category": "tutorial",
+                "name": "manualMining"
+            }
         },
         "manualMining": {
             "description": "To start making resources, click on the Manual Miner you have to generate some copper.",
             "requirements": [
-                { "name": "item", "amount": 50 , "itemName": "copperRaw" }
+                { 
+                    "name": "item", 
+                    "args": { 
+                        "itemName": "copperRaw",
+                        "amount": 50
+                    }
+                }
             ],
-            "rewards": {
-                "unlock": "refinery",
-                "item.quid": 50
-            },
-            "linkTo": "tutorial.refining"
+            "rewards": [
+                { 
+                    "name": "quid", 
+                    "args": { 
+                        "amount": 250
+                    }
+                }
+            ],
+            "punishments": [
+                {
+                    "name": "quid",
+                    "args": {
+                        "amount": 50
+                    }
+                }
+            ],
+            "timeLimit": 5,
+            "linkTo": {
+                "category": "tutorial",
+                "name": "refining"
+            }
         },
         "refining": {
-            "time": 100,
             "description": "Now that you have a refiner, you can start getting more from your resources",
             "requirements": [
-                { "name": "item", "amount": 50 , "itemName": "copperBar" }
+                { 
+                    "name": "item", 
+                    "args": { 
+                        "itemName": "copperBar",
+                        "amount": 50
+                    }
+                }
             ],
-            "rewards": {
-                "unlock": "autoMiner",
-                "quid": 50
-            },
-            "punishments": {
-                "quid": 50
-            },
-            "otherData": ["endTutorial"]
+            "rewards": [
+                { 
+                    "name": "unlockMachine", 
+                    "args": { 
+                        "unlockName": "autoMiner"
+                    }
+                }
+            ],
+            "punishments": [
+                {
+                    "name": "quid",
+                    "args": {
+                        "amount": 50
+                    }
+                }
+            ],
+            "timeLimit": 5,
+            "otherData": [
+                "endTutorial"
+            ]
         }
     },
     "random": {

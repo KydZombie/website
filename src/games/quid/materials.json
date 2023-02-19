@@ -1,6 +1,6 @@
 {
     "metal": {
-        "variants": ["raw, bar, wire, rod"],
+        "variants": ["ore, bar, wire, rod"],
         "materials": {
             "copper": {
                 "color": "#B87333"

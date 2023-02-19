@@ -13,8 +13,10 @@ export async function traverseJson(json: ParsedJson, path: string): Promise<any>
 
     let currentObj = await json;
     while (directory.length > 0) {
+        
         let thing = directory.pop()!;
         currentObj = currentObj[thing];
     }
+    
     return currentObj;
 }

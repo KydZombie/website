@@ -1,2 +1,3 @@
 import { PageList } from "./common/page-list.js";
 new PageList("pages.json", document.getElementById("pagelistcontainer"), document.getElementById("infopanel"));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNLHVCQUF1QixDQUFDO0FBRWpELElBQUksUUFBUSxDQUNWLFlBQVksRUFDWixRQUFRLENBQUMsY0FBYyxDQUFDLG1CQUFtQixDQUFFLEVBQzdDLFFBQVEsQ0FBQyxjQUFjLENBQUMsV0FBVyxDQUFFLENBQ3RDLENBQUMifQ==

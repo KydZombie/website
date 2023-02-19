@@ -1,4 +1,4 @@
-import { Sprite, SpriteData } from "./sprite.js";
+import { Sprite, SpriteData } from "./sprites/sprite.js";
 export let buildings = new Map();
 export class Building extends Sprite {
     constructor(name, xOrPos, y) {
