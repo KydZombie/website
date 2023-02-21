@@ -5,7 +5,7 @@ import { ItemRequirement } from "./bounties/requirements/item-requirement.js";
 import { ClickRequirement } from "./bounties/requirements/click-requirement.js";
 import { QuidRequirement } from "./bounties/requirements/quid-requirement.js";
 import { QuidReward } from "./bounties/rewards/quid-reward.js";
-import { UnlockMachineReward } from "./bounties/rewards/unlock-machine-reward.js";
+import { UnlockBuildingReward } from "./bounties/rewards/unlock-building-reward.js";
 import { updateDelta } from "../../common/deltaTime.js";
 import { QuidPunishment } from "./bounties/punishments/quid-punishment.js";
 import { World } from "./world.js";
@@ -50,7 +50,7 @@ class State {
         bounties.useRequirement("quid", QuidRequirement);
 
         bounties.useReward("quid", QuidReward);
-        bounties.useReward("unlockMachine", UnlockMachineReward);
+        bounties.useReward("unlockBuilding", UnlockBuildingReward);
 
         bounties.usePunishment("quid", QuidPunishment);
 

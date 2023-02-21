@@ -30,7 +30,6 @@ export async function registerMaterials() {
             let data = materialSet.materials[name];
             data.variants = variants;
             new Material(name, data);
-            console.log(name);
         });
     }
     console.log("Finished loading materials");

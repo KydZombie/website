@@ -18,8 +18,13 @@
         "copperRaw": "Raw Copper",
         "copperBar": "Copper Bar"
     },
-    "machine": {
+    "building": {
+        "ore": "Ore",
+        "refinery": "Refinery",
         "autoMiner": "Automatic Miner"
+    },
+    "buildingDescription": {
+        "ore": "A cluster of ore"
     },
     "bounty": {
         "tutorial": {
