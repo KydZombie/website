@@ -68,7 +68,7 @@ export class World {
             for (let y = 0; y < WORLD_SIZE; y++){
                 let generateOreChance = Math.random();
                 if (generateOreChance > .98) {
-                    this.layout[x][y] = new Ore(getMaterial("copper"), x, y);
+                    this.layout[x][y] = new Ore(x, y, getMaterial("copper"));
                 } else {
                     this.layout[x][y] = null;
                 }
@@ -111,7 +111,7 @@ export class World {
             console.log("Already a building there");
             return false;
         }
-        this.layout[x][y] = new tile(args, x, y);
+        this.layout[x][y] = new tile(x, y, args);
         return true;
     }
 

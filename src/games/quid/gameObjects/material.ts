@@ -4,12 +4,18 @@ let materials = new Map<string, Material>();
 
 interface MaterialData {
     variants?: string[];
-    color: string;
+    color: HSLData;
+}
+
+interface HSLData {
+    hue: string,
+    saturation: string,
+    lightness: string
 }
 
 export class Material {
     name: string;
-    color: string;
+    color: HSLData;
     variants?: string[];
     constructor(name: string, data: MaterialData) {
         this.name = name;

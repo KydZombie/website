@@ -1,4 +1,4 @@
-import type { Material } from "./material";
+import { Material } from "./material";
 
 export interface Cache {
     [key: string]: HTMLImageElement;
@@ -68,17 +68,27 @@ export class Building {
 
 export class Ore extends Building {
     overlay: HTMLImageElement;
+    material: Material
 
-    constructor(protected material: Material, x: number, y: number) {
-        super("assets/building/ore.png", x, y);
-        this.overlay = textureCache.getTexture("assets/item/metalRaw.png");
-        // this.overlay.style.filter = `sepia(100%)`;
+    constructor(x: number, y: number, args: Material | { material: Material }) {
+        super("assets/building/stone.png", x, y);
+        this.overlay = textureCache.getTexture("assets/building/oreOverlay.png");
+        if (args instanceof Material) {
+            this.material = args;
+        } else {
+            this.material = args.material;
+        }
     }
 
     draw(ctx: CanvasRenderingContext2D, offset: {x: number, y: number}, size: number) {
         super.draw(ctx, offset, size);
 
-        ctx.filter = "sepia(100%) saturate(2692%) hue-rotate(161deg)";
+        // console.log(this.material);
+
+        // console.log(`hue-rotate(${this.material.color.hue}), saturate(${this.material.color.saturation})`);
+        // console.log("hue-rotate(" + this.material.color.hue + "), saturate(" + this.material.color.saturation + ")");
+
+        ctx.filter = "hue-rotate(" + this.material.color.hue + "), saturate(" + this.material.color.saturation + ")";
 
         ctx.drawImage(this.overlay, this.x * size + offset.x, this.y * size + offset.y, size, size);
 
