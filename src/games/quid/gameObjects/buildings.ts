@@ -72,10 +72,28 @@ export class Ore extends Building {
     constructor(protected material: Material, x: number, y: number) {
         super("assets/building/ore.png", x, y);
         this.overlay = textureCache.getTexture("assets/item/metalRaw.png");
+        // this.overlay.style.filter = `sepia(100%)`;
     }
 
     draw(ctx: CanvasRenderingContext2D, offset: {x: number, y: number}, size: number) {
         super.draw(ctx, offset, size);
+
+        ctx.filter = "sepia(100%) saturate(2692%) hue-rotate(161deg)";
+
         ctx.drawImage(this.overlay, this.x * size + offset.x, this.y * size + offset.y, size, size);
+
+        ctx.filter = "none";
+        
+
+        // ctx.globalCompositeOperation = "overlay";
+        
+        // ctx.fillRect(this.x * size + offset.x, this.y * size + offset.y, size, size);
+        // ctx.fillStyle = "blue";
+        // ctx.globalCompositeOperation = "source-atop";
+        // // ctx.globalCompositeOperation = "destination-out";
+        // ctx.drawImage(this.overlay, this.x * size + offset.x, this.y * size + offset.y, size, size);
+        
+        
+        // ctx.globalCompositeOperation = "source-over";
     }
 }
