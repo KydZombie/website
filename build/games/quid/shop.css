@@ -1,8 +1,19 @@
 #shop {
     background: #E0E0E0;
-    width: 100%;
-    height: 100%;
     overflow-y: scroll;
+    scrollbar-color: black transparent;
+    scrollbar-width: 3px;
+}
+
+#shop::-webkit-scrollbar {
+    width: 3px;
+    height: 8px;
+    background-color: transparent;
+}
+
+#shop::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 5px;
 }
 
 #shoptitle {
@@ -23,7 +34,6 @@
 
 #shopitemholder {
     display: grid;
-    height: 100%;
     padding-top: 46px;
     gap: 5px;
     margin: 5px;
@@ -31,11 +41,42 @@
 }
 
 .shopitem {
+    display: inline-flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
     background: #90A4AE;
-    height: 150px;
+    aspect-ratio: 1;
     border-radius: 5px;
 }
 
 .shopitem:hover {
     background: #B0BEC5;
+}
+
+.shopitem:active {
+    background: #889398;
+}
+
+.shopitem > h1 {
+    text-align: center;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+    font-family: Potta;
+    color: black;
+}
+
+.shopitem > img {
+    image-rendering: pixelated;
+    width: 50%;
+    height: auto;
+}
+
+.shopitem > p {
+    font-size: .75rem;
+    padding: 0;
+    margin: 0;
+    color: black;
+    font-family: Mochiy;
 }

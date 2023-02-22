@@ -37,6 +37,12 @@
                     "args": { 
                         "amount": 250
                     }
+                },
+                {
+                    "name": "unlockBuilding", 
+                    "args": { 
+                        "unlockName": "refinery"
+                    }
                 }
             ],
             "punishments": [
@@ -66,7 +72,7 @@
             ],
             "rewards": [
                 { 
-                    "name": "unlockMachine", 
+                    "name": "unlockBuilding", 
                     "args": { 
                         "unlockName": "autoMiner"
                     }
@@ -87,16 +93,6 @@
         }
     },
     "random": {
-        "gettingResources": {
-            "description": "Get some copper for me",
-            "requirements": [
-                { "name": "item", "itemName": "copperRaw", "amount": 50 }
-            ],
-            "rewards": {
-                "unlock": "refinery",
-                "item.quid": 50
-            },
-            "linkTo": "tutorial.refining"
-        }
+        
     }
 }

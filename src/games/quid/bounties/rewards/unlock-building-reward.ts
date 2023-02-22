@@ -2,7 +2,7 @@ import { asyncTranslate, translateElement } from "../../../../common/translation
 import { BountiesContainer } from "../bounties-container.js";
 import { Reward } from "./reward.js";
 
-export class UnlockMachineReward implements Reward {
+export class UnlockBuildingReward implements Reward {
     public constructor(
         public container: BountiesContainer,
         public args: {
@@ -10,7 +10,7 @@ export class UnlockMachineReward implements Reward {
         }
     ) {}
     translateElement(element: HTMLElement): void {
-        translateElement(element, asyncTranslate("ui.unlock"), asyncTranslate(`machine.${this.args.unlockName}`));
+        translateElement(element, asyncTranslate("ui.unlock"), asyncTranslate(`building.${this.args.unlockName}`));
     }
     
     giveReward(): void {

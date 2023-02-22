@@ -4,12 +4,18 @@ let materials = new Map<string, Material>();
 
 interface MaterialData {
     variants?: string[];
-    color: string;
+    color: HSLData;
+}
+
+interface HSLData {
+    hue: string,
+    saturation: string,
+    lightness: string
 }
 
 export class Material {
     name: string;
-    color: string;
+    color: HSLData;
     variants?: string[];
     constructor(name: string, data: MaterialData) {
         this.name = name;
@@ -30,7 +36,6 @@ export async function registerMaterials() {
             let data = materialSet.materials[name];
             data.variants = variants;
             new Material(name, data);
-            console.log(name);
         });
     }
     console.log("Finished loading materials");

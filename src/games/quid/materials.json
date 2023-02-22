@@ -3,7 +3,11 @@
         "variants": ["ore, bar, wire, rod"],
         "materials": {
             "copper": {
-                "color": "#B87333"
+                "color": {
+                    "hue": "28.87deg",
+                    "saturation": "57%",
+                    "lightness": "46%"
+                }
             }
         }
     }
