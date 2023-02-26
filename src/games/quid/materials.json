@@ -8,6 +8,13 @@
                     "saturation": "57%",
                     "lightness": "46%"
                 }
+            },
+            "rainbow": {
+                "color": {
+                    "hue": "0deg",
+                    "saturation": "100%",
+                    "lightness": "100%"
+                }
             }
         }
     }

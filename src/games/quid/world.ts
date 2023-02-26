@@ -1,4 +1,4 @@
-import { Building, BuildingHighlight, Ore } from "./gameObjects/buildings.js";
+import { Building, BuildingHighlight, Ore, RainbowOre } from "./gameObjects/buildings.js";
 import { getMaterial } from "./gameObjects/material.js";
 
 const WORLD_SIZE = 32;
@@ -86,7 +86,7 @@ export class World {
 
     click(x: number, y: number) {
         let coordinates = this.getTileCoordinates(x, y);
-        this.setTile(coordinates.x, coordinates.y, Ore, getMaterial("copper"));
+        this.setTile(coordinates.x, coordinates.y, RainbowOre);
     }
 
     hover(x: number, y: number) {

@@ -1,4 +1,4 @@
-import { Material } from "./material.js";
+import { getMaterial, Material } from "./material.js";
 
 export interface Cache {
     [key: string]: HTMLImageElement;
@@ -61,15 +61,18 @@ export class Building {
         this.texture = textureCache.getTexture(textureId);
     }
 
-    draw(ctx: CanvasRenderingContext2D, offset: {x: number, y: number}, size: number) {
+    drawBase(ctx: CanvasRenderingContext2D, offset: {x: number, y: number}, size: number) {
         ctx.drawImage(this.texture, this.x * size + offset.x, this.y * size + offset.y, size, size);
+    }
+
+    draw(ctx: CanvasRenderingContext2D, offset: {x: number, y: number}, size: number) {
+        this.drawBase(ctx, offset, size);
     }
 }
 
 export class Ore extends Building {
     overlay: HTMLImageElement;
-    material: Material
-
+    material: Material;
 
     constructor(x: number, y: number, args: Material | { material: Material } | any) {
         super("assets/building/stone.png", x, y);
@@ -87,27 +90,31 @@ export class Ore extends Building {
     }
 
     draw(ctx: CanvasRenderingContext2D, offset: {x: number, y: number}, size: number) {
-        super.draw(ctx, offset, size);
+        this.drawBase(ctx, offset, size);
 
-        // console.log(`hue-rotate(${this.material.color.hue}), saturate(${this.material.color.saturation})`);
-        // console.log("hue-rotate(" + this.material.color.hue + "), saturate(" + this.material.color.saturation + ")");
-
-        ctx.filter = `hue-rotate(${this.material.color.hue}), saturate(${this.material.color.saturation})`;
+        ctx.filter = `hue-rotate(${this.material.color.hue}) saturate(${this.material.color.saturation})`;
 
         ctx.drawImage(this.overlay, this.x * size + offset.x, this.y * size + offset.y, size, size);
 
         ctx.filter = "none";
-        
+    }
+}
 
-        // ctx.globalCompositeOperation = "overlay";
-        
-        // ctx.fillRect(this.x * size + offset.x, this.y * size + offset.y, size, size);
-        // ctx.fillStyle = "blue";
-        // ctx.globalCompositeOperation = "source-atop";
-        // // ctx.globalCompositeOperation = "destination-out";
-        // ctx.drawImage(this.overlay, this.x * size + offset.x, this.y * size + offset.y, size, size);
-        
-        
-        // ctx.globalCompositeOperation = "source-over";
+export class RainbowOre extends Ore {
+    index = 0;
+
+    constructor(x: number, y: number) {
+        super(x, y, getMaterial("rainbow"));
+    }
+
+    draw(ctx: CanvasRenderingContext2D, offset: { x: number; y: number; }, size: number): void {
+        this.drawBase(ctx, offset, size);
+
+        ctx.filter = "brightness(1) saturate(100%) hue-rotate(" + this.index / 4 + "deg)";
+        this.index++;
+
+        ctx.drawImage(this.overlay, this.x * size + offset.x, this.y * size + offset.y, size, size);
+
+        ctx.filter = "none";
     }
 }
