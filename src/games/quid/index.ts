@@ -57,6 +57,8 @@ class State {
         const canvas = document.getElementById("gamescreen") as HTMLCanvasElement;
         const ctx = canvas.getContext("2d")!;
 
+        ctx.imageSmoothingEnabled = false;
+
         const world = new World(canvas, ctx);
 
         const panel = document.getElementById("panel")!;
