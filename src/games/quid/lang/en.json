@@ -20,11 +20,13 @@
     },
     "building": {
         "ore": "Ore",
+        "rainbowOre": "Rainbow Ore",
         "refinery": "Refinery",
         "autoMiner": "Automatic Miner"
     },
     "buildingDescription": {
-        "ore": "A cluster of ore"
+        "ore": "A cluster of ore",
+        "rainbowOre": "A cluster of rainbow ore"
     },
     "bounty": {
         "tutorial": {

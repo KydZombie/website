@@ -86,7 +86,6 @@ export class Ore extends Building {
                 this.material = args[0];
             }
         }
-        console.log(this.material);
     }
 
     draw(ctx: CanvasRenderingContext2D, offset: {x: number, y: number}, size: number) {
@@ -110,7 +109,7 @@ export class RainbowOre extends Ore {
     draw(ctx: CanvasRenderingContext2D, offset: { x: number; y: number; }, size: number): void {
         this.drawBase(ctx, offset, size);
 
-        ctx.filter = "brightness(1) saturate(100%) hue-rotate(" + this.index / 4 + "deg)";
+        ctx.filter = "brightness(1) saturate(100%) hue-rotate(" + this.index / .1 + "deg)";
         this.index++;
 
         ctx.drawImage(this.overlay, this.x * size + offset.x, this.y * size + offset.y, size, size);

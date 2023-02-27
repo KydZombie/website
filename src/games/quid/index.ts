@@ -11,9 +11,12 @@ import { QuidPunishment } from "./bounties/punishments/quid-punishment.js";
 import { World } from "./world.js";
 import { Shop } from "./shop.js";
 import { registerMaterials } from "./gameObjects/material.js";
+import { Building } from "./gameObjects/buildings.js";
 
 class State {
     private obtained = {};
+    private selectedBuilding?: Building;
+    private buildingArgs?: any;
     private quidElement = document.getElementById("quidcounter")!;
     private quid = 0;
 
@@ -114,6 +117,19 @@ class State {
 
     queueBounty(category: string, name: string) {
         this.bounties.queueBounty(category, name);
+    }
+    
+    setSelectedBuilding(building?: Building, args?: any) {
+        this.selectedBuilding = building;
+        this.buildingArgs = args;
+    }
+    
+    getSelectedBuilding() {
+        return this.selectedBuilding;
+    }
+    
+    getBuildingArgs() {
+        return this.buildingArgs;
     }
 }
 

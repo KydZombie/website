@@ -34,11 +34,11 @@
     "cardsList": {
         "Cards": {
             "description": "A basic card program.",
-            "link": "cards/"
+            "link": "projects/cards/"
         },
         "Wiki Cards": {
             "description": "Cards, but with random Wikipedia pages.",
-            "link": "cards/wiki/"
+            "link": "projects/cards/wiki/"
         }
     },
     "projectsList": {

@@ -86,7 +86,11 @@ export class World {
 
     click(x: number, y: number) {
         let coordinates = this.getTileCoordinates(x, y);
-        this.setTile(coordinates.x, coordinates.y, RainbowOre);
+        let tile = window.state.getSelectedBuilding();
+        if (tile != null) {
+            this.setTile(coordinates.x, coordinates.y, tile, window.state.getBuildingArgs());
+        }
+        // this.setTile(coordinates.x, coordinates.y, RainbowOre);
     }
 
     hover(x: number, y: number) {
