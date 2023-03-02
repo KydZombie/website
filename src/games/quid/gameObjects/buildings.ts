@@ -74,18 +74,10 @@ export class Ore extends Building {
     overlay: HTMLImageElement;
     material: Material;
 
-    constructor(x: number, y: number, args: Material | { material: Material } | any) {
+    constructor(x: number, y: number, args: Material | { material: Material }) {
         super("assets/building/stone.png", x, y);
         this.overlay = textureCache.getTexture("assets/building/oreOverlay.png");
-        if (args instanceof Material) {
-            this.material = args;
-        } else {
-            if (args.material != undefined) {
-                this.material = args.material;
-            } else {
-                this.material = args[0];
-            }
-        }
+        this.material = args instanceof Material? args : args.material;
     }
 
     draw(ctx: CanvasRenderingContext2D, offset: {x: number, y: number}, size: number) {

@@ -55,7 +55,7 @@ export class Shop {
         this.addShopItem("building.ore", "buildingDescription.ore", "assets/item/metalRaw.png", Ore, { material: getMaterial("copper")});
     }
 
-    addShopItem(name: string, description: string, imageSrc: string, building: any, ...args: any[]) {
+    addShopItem(name: string, description: string, imageSrc: string, building: any, args?: any) {
         let newItem = new ShopItem(name, description, imageSrc, building, args);
         this.items.push(newItem);
         this.element.appendChild(newItem.getElement());

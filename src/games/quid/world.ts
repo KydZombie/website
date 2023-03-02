@@ -107,7 +107,7 @@ export class World {
         return (x >= 0 && x < WORLD_SIZE && y >= 0 && y < WORLD_SIZE);
     }
 
-    setTile(x: number, y: number, tile: any, ...args: any[]): boolean {
+    setTile(x: number, y: number, tile: any, args?: any): boolean {
         if (!this.isInsideWorld(x, y)) {
             console.log("Clicked outside of world");
             return false;
