@@ -1,9 +1,1 @@
-@font-face {
-    font-family: Potta;
-    src: url(../fonts/PottaOne.ttf);
-}
-
-@font-face {
-    font-family: Mochiy;
-    src: url(../fonts/MochiyPopOne.ttf);
-}
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Potta+One&display=swap');

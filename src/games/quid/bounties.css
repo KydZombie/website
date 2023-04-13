@@ -13,7 +13,7 @@
     background: #c8a384;
     text-align: center;
     font-size: 2rem;
-    font-family: Mochiy;
+    font-family: 'Mochiy Pop One';
     height: auto;
     font-weight: 100;
     margin: 0;
@@ -93,7 +93,7 @@
 }
 
 .bounty > * {
-    font-family: Mochiy;
+    font-family: 'Mochiy Pop One';
     font-size: 0.6rem;
 
     padding: 0;
